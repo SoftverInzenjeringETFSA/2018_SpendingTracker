@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fof1f1">
+
+    <ImageView
+        android:id="@+id/loginSlika"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/registracija"/>
+
+    <TextView
+        android:id="@+id/textIspod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginSlika"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Prijavi se"
+        android:textColor="44525c"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewMailP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="44dp"
+        android:text="E-mail"
+        android:layout_below="@+id/textIspod"
+        android:layout_alignParentStart="true"
+        android:textColor="#e6b247"
+        android:background="#f0f1f1" />
+
+    <TextView
+        android:id="@+id/textViewSifraP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewMailP"
+        android:layout_below="@+id/textViewMailP"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="44dp"
+        android:text="Password"
+        android:layout_alignParentStart="true"
+        android:textColor="#e6b247"
+        android:background="#f0f1f1" />
+
+    <EditText
+        android:id="@+id/editTextMailP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textIspod"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextSifraP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editTextMailP"
+        android:layout_below="@+id/editTextMailP"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewSifraP"
+        android:layout_below="@+id/editTextSifraP"
+        android:layout_marginTop="41dp"
+        android:text="Nemate račun?"
+        android:textColor="#e6b247"
+        android:background="#f0f1f1"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_marginStart="34dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="Registruj se"
+        android:textColor="#e6b247"
+        android:background="#f0f1f1"/>
+
+    <Button
+        android:id="@+id/buttonPrijava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="90dp"
+        android:background="#44525c"
+        android:text="Prijavi se"
+        android:textColor="#f0f1f1" />
+
+</RelativeLayout>

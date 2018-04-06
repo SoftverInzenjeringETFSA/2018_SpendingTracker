@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f1f1">
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@mipmap/puzzle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/textViewNova"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView4"
+        android:text="Nova kategorija"
+        android:layout_marginTop="16dp"
+        android:background="#fof1f1"
+        android:textSize="16sp"
+        android:textColor="#44525c"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewNovaK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewNova"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="53dp"
+        android:text="Naziv kategorije"
+        android:layout_alignParentStart="true"
+        android:textColor="#e6b247"
+        android:background="#fof1f1"/>
+
+    <EditText
+        android:id="@+id/editTextNazivK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignBaseline="@+id/textViewNovaK"
+        android:layout_alignBottom="@+id/textViewNovaK"
+        android:layout_alignStart="@+id/textViewNova" />
+
+    <Button
+        android:id="@+id/buttonNovaK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="102dp"
+        android:text="Unesi"
+        android:background="#44525c"
+        android:textColor="#f0f1f1"/>
+
+
+</RelativeLayout>
