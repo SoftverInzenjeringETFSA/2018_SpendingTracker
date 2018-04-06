@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fof1f1">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@mipmap/puzzle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/textViewKat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView2"
+        android:layout_below="@+id/imageView2"
+        android:text="Kategorije"
+        android:layout_marginTop="16dp"
+        android:background="#fof1f1"
+        android:textSize="16dp"
+        android:textColor="#44525c"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/buttonOdjeca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Odjeća"
+        android:layout_below="@+id/textViewKat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:background="#f0f1f1"
+        android:textColor="#343c47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/buttonNamirnice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/buttonOdjeca"
+        android:layout_below="@+id/buttonOdjeca"
+        android:layout_marginTop="13dp"
+        android:text="Namirnice"
+        android:background="#f0f1f1"
+        android:textColor="#343c47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/buttonNamirnice"
+        android:layout_below="@+id/buttonNamirnice"
+        android:layout_marginTop="21dp"
+        android:text="Zabava"
+        android:background="#f0f1f1"
+        android:textColor="#343c47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button3"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="19dp"
+        android:text="Pokloni"
+        android:background="#f0f1f1"
+        android:textColor="#343c47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>/>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Kućanstvo"
+        android:background="#f0f1f1"
+        android:textColor="#343c47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>/>
+
+</RelativeLayout>

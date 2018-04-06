@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#343c47">
+
+    <ImageView
+        android:id="@+id/imageViewHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@mipmap/home"
+        android:background="#343c47"/>
+
+    <Button
+        android:id="@+id/buttonMojRacun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageViewHome"
+        android:background="#343c47"
+        android:text="Moj račun"
+        android:textColor="#f0f1f1" />
+
+    <Button
+        android:id="@+id/buttonKategorija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonMojRacun"
+        android:layout_centerHorizontal="true"
+        android:text="Statistika"
+        android:background="#343c47"
+        android:textColor="#f0f1f1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/buttonStatistika"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategorija"
+        android:layout_below="@+id/buttonKategorija"
+        android:layout_alignStart="@+id/buttonKategorija"
+        android:background="#343c47"
+        android:textColor="#f0f1f1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/buttonHistorija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historija"
+        android:layout_below="@+id/buttonStatistika"
+        android:layout_alignStart="@+id/buttonStatistika"
+        android:background="#343c47"
+        android:textColor="#f0f1f1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>
+
+
+</RelativeLayout>

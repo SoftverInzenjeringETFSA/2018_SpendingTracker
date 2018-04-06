@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fof1f1">
+
+    <ImageView
+        android:id="@+id/registracijaSlika"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtIspodSlike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registracija"
+        android:textColor="44525c"
+        android:layout_above="@+id/editIme"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtIme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ime i prezime"
+        android:layout_below="@+id/registracijaSlika"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247"/>
+
+    <TextView
+        android:id="@+id/txtPrihod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mjesečni prihod"
+        android:layout_below="@+id/txtIme"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247"/>
+
+    <TextView
+        android:id="@+id/txtLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Troškovni limit"
+        android:layout_below="@+id/txtPrihod"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247"/>
+
+    <TextView
+        android:id="@+id/txtValuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valuta"
+        android:layout_below="@+id/txtLimit"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247" />
+
+    <TextView
+        android:id="@+id/txtMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="e-mail"
+        android:layout_below="@+id/txtValuta"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247"/>
+
+    <TextView
+        android:id="@+id/txtRacun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Račun"
+        android:layout_below="@+id/txtMail"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:textColor="#e6b247"/>
+
+    <EditText
+        android:id="@+id/editIme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtIme"
+        android:layout_alignBottom="@+id/txtIme"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp" />
+
+    <EditText
+        android:id="@+id/editPrihod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtPrihod"
+        android:layout_alignBottom="@+id/txtPrihod"
+        android:layout_alignStart="@+id/editIme" />
+
+    <EditText
+        android:id="@+id/editLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtLimit"
+        android:layout_alignBottom="@+id/txtLimit"
+        android:layout_alignStart="@+id/editPrihod" />
+
+    <EditText
+        android:id="@+id/editValuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtValuta"
+        android:layout_alignBottom="@+id/txtValuta"
+        android:layout_alignStart="@+id/editLimit" />
+
+    <EditText
+        android:id="@+id/editMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtMail"
+        android:layout_alignBottom="@+id/txtMail"
+        android:layout_alignStart="@+id/editValuta" />
+
+    <EditText
+        android:id="@+id/editRacun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="unos"
+        android:layout_alignBaseline="@+id/txtRacun"
+        android:layout_alignBottom="@+id/txtRacun"
+        android:layout_alignStart="@+id/editMail" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editRacun"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:background="#44525c"
+        android:text="Registruj se"
+        android:textColor="#f0f1f1"/>
+
+</RelativeLayout>

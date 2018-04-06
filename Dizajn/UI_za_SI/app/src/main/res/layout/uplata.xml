@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f1f1">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@mipmap/cash"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
+
+    <TextView
+        android:id="@+id/textViewUplata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novi trošak"
+        android:layout_marginTop="16dp"
+        android:background="#fof1f1"
+        android:textSize="16dp"
+        android:textColor="#44525c"
+        android:textAlignment="center"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/buttonOdabir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Odabir kategorije"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/textViewUplata"
+        android:layout_centerInParent="true"
+        android:background="#44525c"
+        android:textColor="#f0f1f1"/>
+
+    <Button
+        android:id="@+id/buttonUplati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unesi"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/buttonOdabir"
+        android:layout_centerInParent="true"
+        android:background="#44525c"
+        android:textColor="#f0f1f1"/>
+
+</RelativeLayout>

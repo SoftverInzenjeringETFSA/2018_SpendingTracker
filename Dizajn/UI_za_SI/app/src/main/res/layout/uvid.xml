@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f1f1">
+
+    <ImageView
+        android:id="@+id/imageViewMeni"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="#ffffff"
+        app:srcCompat="@mipmap/meni"
+        />
+
+    <TextView
+        android:id="@+id/txtStanje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewMeni"
+        android:layout_centerHorizontal="true"
+        android:text="Trenutno stanje"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/txtTrenutno"
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtStanje"
+        android:layout_marginTop="16dp"
+        android:background="#6fad4a"
+        android:textSize="50dp"
+        android:textColor="#fof1f1"
+        android:text="_ _ _ _"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/buttonTrosak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UNESI TROŠAK"
+        android:layout_below="@+id/txtTrenutno"
+        android:layout_centerHorizontal="true"
+        android:background="#44525c"
+        android:textColor="#f0f1f1"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/buttonPrihod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UNESI PRIHOD"
+        android:layout_below="@+id/buttonTrosak"
+        android:layout_centerHorizontal="true"
+        android:background="#44525c"
+        android:textColor="#f0f1f1"
+        android:layout_marginTop="20dp" />
+</RelativeLayout>
