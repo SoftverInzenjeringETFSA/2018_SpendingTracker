@@ -1,0 +1,3 @@
+rootProject.name = 'SpendingTracker'
+
+include ':app'
