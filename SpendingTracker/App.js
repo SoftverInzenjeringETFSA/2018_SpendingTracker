@@ -14,6 +14,9 @@ import {
 import DevelopersHelp from './components/DeveloersHelp';
 import Home from './components/Home';
 import {Navigation, StackNavigator} from 'react-navigation';
+
+import nodejs from 'nodejs-mobile-react-native';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -27,6 +30,19 @@ const AppNavigator = StackNavigator({
   
 });
 export default class App extends Component {
+
+  componentWillMount()
+  {
+    nodejs.start('main.js');
+    nodejs.channel.addListener(
+      'message',
+      (msg) => {
+        alert('From node: ' + msg);
+      },
+      this 
+    );
+  }
+
   render() {
     return (
     
