@@ -1,5 +1,7 @@
 {
+  "name": "STreact-native",
+  "displayName": "STreact-native",
   "expo": {
     "sdkVersion": "27.0.0"
-  }
+}
 }
