@@ -77,7 +77,7 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
    .send('Bad request');
   }
   //provjere
-  /*korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     if(person.kategorije.length == 0){
       res.status(403)       
@@ -92,9 +92,8 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
       .send('Forbidden');
     }
 
-  });*/
+  });
   req.kategorija = kategorija;
-  next(); 
 });
 
 
