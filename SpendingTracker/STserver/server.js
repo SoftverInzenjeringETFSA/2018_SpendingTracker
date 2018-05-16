@@ -48,9 +48,9 @@ routerAPI.get('/vratiKorisnika/:ime/:prezime/:lozinka', function(req, res) {
   korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person);
-  });
-  
+  });  
 });
+
 
 app.use(bodyParser.json());
 routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res) {
@@ -60,6 +60,51 @@ routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res)
   var lozinka = req.params.lozinka;
 
   korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, {new: true}, 
+  function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("succesfully saved");
+  });
+});
+
+// route middleware za validaciju :kategorija
+routerAPI.param('kategorija', function(req, res, next, kategorija) {
+  var ime = req.params.ime;
+  var prezime = req.params.prezime;
+  var lozinka = req.params.lozinka;
+  //kategorija moze imati samo slova i brojeve (i _)
+  if(!/^\w+$/.test(kategorija)) {
+    res.status(400)       
+   .send('Bad request');
+  }
+  //provjere
+  /*korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+    if (err) return handleError(err);
+    if(person.kategorije.length == 0){
+      res.status(403)       
+      .send('Forbidden');
+    }
+    else if(!person.kategorije.find(kat => {return kat.naziv == kategorija})){
+      res.status(403)       
+      .send('Forbidden');
+    }
+    else if(person.kategorije.length == 1 && person.kategorije[0].naziv == req.kategorija){
+      res.status(403)       
+      .send('Forbidden');
+    }
+
+  });*/
+  req.kategorija = kategorija;
+  next(); 
+});
+
+
+routerAPI.get('/ukloniKategoriju/:ime/:prezime/:lozinka/:kategorija', function(req, res) {
+  var ime = req.params.ime;
+  var prezime = req.params.prezime;
+  var lozinka = req.params.lozinka;
+  var kategorija = req.params.kategorija;
+
+  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send("succesfully saved");
