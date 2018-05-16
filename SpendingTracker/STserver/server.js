@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
+var bodyParser = require('body-parser');
 
 var routerAPI = express.Router();
 
@@ -16,6 +17,9 @@ var korisnikSchema = new Schema(
       troskovniLimit: Number,
       valuta: String,
       email: String,
+      kategorije: [
+        { naziv: String }
+      ],
       racuni: [
         { naziv: String, 
           trenutniIznos: Number,
@@ -46,6 +50,20 @@ routerAPI.get('/vratiKorisnika/:ime/:prezime/:lozinka', function(req, res) {
     res.send(person);
   });
   
+});
+
+app.use(bodyParser.json());
+routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res) {
+  var nazivKategorije = req.body.naziv;
+  var ime = req.params.ime;
+  var prezime = req.params.prezime;
+  var lozinka = req.params.lozinka;
+
+  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, {new: true}, 
+  function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("succesfully saved");
+  });
 });
 
 
