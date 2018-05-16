@@ -110,6 +110,23 @@ routerAPI.get('/ukloniKategoriju/:ime/:prezime/:lozinka/:kategorija', function(r
   });
 });
 
+routerAPI.post('/dodajNoviTrosak/:ime/:prezime/:lozinka/:racun', function(req, res) {
+  var trosak = req.body.trosak;
+  var ime = req.params.ime;
+  var prezime = req.params.prezime;
+  var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
+  var kategorija = req.body.kategorija;
+  var danas = new Date();
+
+  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka, 'racun': racun},
+  {$push:{'troskovi': {'iznos': trosak, 'date': danas, 'kategorija': {'naziv': kategorija}}}}, {new: true}, 
+  function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("Dodan novi trošak");
+  });
+});
+
 
 app.get('/', function (req, res) {
 
