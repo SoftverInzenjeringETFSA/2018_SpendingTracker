@@ -117,16 +117,28 @@ routerAPI.get('/vratiKorisnika/:ime/:prezime/:lozinka', function(req, res) {
   });  
 });
 
-routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka/:racun', function(req, res) {
+routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
   //ovako uzimate parametre iz rute
   var ime = req.params.ime;
   var prezime = req.params.prezime;
   var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
   
   //query
   korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
-    res.send(person);
+    var datumi_iznosi;
+    var brojac=0;
+    if (korisnik!=null)
+    for(i=0;i<korisnik.racuni;i++) {
+      for(j=0;j<korisnik.racuni[i].troskovi;j++) {
+        datumi_iznosi[brojac] = {kategorija: korisnik.racuni[i].troskovi[j].kategorija.naziv,
+                                izos:korisnik.racuni[i].troskovi[j].iznos,
+                                datum:korisnik.racuni[i].troskovi[j].datum}
+        brojac++;
+      }
+    }
+    res.send(datumi_iznosi);
   });  
 });
 
