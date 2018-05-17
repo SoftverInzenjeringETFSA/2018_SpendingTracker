@@ -26,7 +26,10 @@ export class Home extends Component{
                 <Button color="#343C47" style={styles.button}  onPress={()=>
                 this.props.navigation.navigate('NewExpense')} title="Unesi prihod"/>   
                     </View>
-            
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('PregledStatistike')} title="Pregled statistike"/>
+                </View>
             </View>
         );
     }

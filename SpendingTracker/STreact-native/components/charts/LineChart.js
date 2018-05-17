@@ -1,7 +1,7 @@
 import React from 'react'
 import { LineChart, Grid } from 'react-native-svg-charts'
 
-export default class LineChartExample extends React.PureComponent {
+export default class LineChartEx extends React.PureComponent {
 
     render() {
 

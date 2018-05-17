@@ -1,7 +1,7 @@
 import React from 'react'
 import { PieChart } from 'react-native-svg-charts'
 
-export default class PieChartExample extends React.PureComponent {
+export default class PieChartEx extends React.PureComponent {
 
     render() {
 

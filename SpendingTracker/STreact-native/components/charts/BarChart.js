@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Grid } from 'react-native-svg-charts';
 
-export default class BarChartExample extends React.PureComponent {
+export default class BarChartEx extends React.PureComponent {
 
     render() {
 
