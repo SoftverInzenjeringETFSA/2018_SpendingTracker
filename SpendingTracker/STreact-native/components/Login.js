@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image,  Button,KeyboardAvoidingView } from 'react-native';
-
+import Toast from 'react-native-simple-toast';
 
 
 export default class Login extends React.Component {
@@ -9,22 +9,22 @@ export default class Login extends React.Component {
     super(props);
     this.state = {email: '', password:''};
     
-    this.person=null;
+    this.person;
   }
 
   onPressButton = () => {
-    console.log('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
-     return fetch('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+    //console.log('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+     return fetch('http://192.168.1.16:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log('nes');
       console.log(responseJson);
       this.person=responseJson;
+      
+      this.props.navigation.navigate('Home', this.person);
     })
     .catch((error) => {
-      console.error(error);
+      Toast.show("Neispravni podaci");
     });
-    console.log(this.person + " heh");
     }
 
   render() {
@@ -53,7 +53,7 @@ export default class Login extends React.Component {
 
         <View style={styles.button}>
         <Button color="#343C47"   onPress={
-                /*this.props.navigation.navigate('Home')*/ this.onPressButton} title="Prijavi se"/>
+                 this.onPressButton} title="Prijavi se"/>
         </View>
 
           <Text 
