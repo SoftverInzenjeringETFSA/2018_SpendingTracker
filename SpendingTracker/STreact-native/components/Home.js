@@ -14,24 +14,23 @@ export class Home extends Component{
                 </View>
                 </View>  
                 <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
-                </View>
+                <Button color="#343C47" style={styles.button}  onPress={()=>
+                this.props.navigation.navigate('NewExpense')} title="Unesi trošak"/>   
+                </View>  
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button}  title="Unesi prihod"/>   
+                    </View>
+                <View style={styles.buttonContainer}>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('PregledKategorija')} title="Pregled kategorija"/>
                 </View>
                 <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('NewExpense')} title="Unesi trošak"/>   
-                </View>  
-                <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('NewExpense')} title="Unesi prihod"/>   
-                    </View>
-                <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('PregledStatistike')} title="Pregled statistike"/>
+                </View>
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
                 </View>
             </View>
         );

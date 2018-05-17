@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 export class  NewExpense extends Component{
   constructor(props){
@@ -22,7 +23,9 @@ export class  NewExpense extends Component{
            kategorije: this.state.category,
            iznos: this.state.value
       }),
+      
     });
+    Toast.show("Uspješno ste dodali novi trošak");
   }
     render(){
         return (
@@ -44,7 +47,7 @@ export class  NewExpense extends Component{
                     <Picker
                     selectedValue={this.state.category}
                     onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}
-                    style={{ height: 50, width: 100,color:"#343C47" }}>
+                    style={{ height: 50, width: 200,color:"#343C47" }}>
                     <Picker.Item label="Odjeca" value="Odjeca" />
                     <Picker.Item label="Namirnice" value="Namirnice" />
                     <Picker.Item label="Zabava" value="Zabava" />
