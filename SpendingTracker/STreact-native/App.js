@@ -5,16 +5,19 @@ import PieChart from './components/charts/PieChart';
 import LineChart from './components/charts/LineChart';
 import DevelopersHelp from './components/DevelopersHelp';
 import Home from './components/Home';
+import NewExpense from './components/NewExpense';
 import {Navigation, StackNavigator} from 'react-navigation';
 
 const AppNavigator = StackNavigator({
     Home: {screen: Home},
-    DevelopersHelp: {screen: DevelopersHelp}
+    DevelopersHelp: {screen: DevelopersHelp},
+    NewExpense: {screen: NewExpense}
     
   });
 export default class App extends React.Component {
   render() {
     return (
+      
       <AppNavigator/>
       /*<View>
         <LineChart/>

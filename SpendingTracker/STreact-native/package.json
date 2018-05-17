@@ -19,11 +19,14 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@shoutem/ui": "^0.23.4",
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-fontawesome": "^5.7.0",
     "react-native-svg": "^6.3.1",
     "react-native-svg-charts": "^5.0.0",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11"
   }
 }
