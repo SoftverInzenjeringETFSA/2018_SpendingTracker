@@ -106,18 +106,18 @@ app.use(bodyParser.json());
 
 //primjer api rute, vraca korisnika s poslanim imenom, prezimenom i lozinkom (u JSON formatu vraćeni podaci)
 //ruta je localhost:8081/api/vratiKorisnika/:ime/:prezime/:lozinka
-routerAPI.get('/vratiKorisnika/:ime/:prezime/:lozinka', function(req, res) {
+routerAPI.get('/vratiKorisnika/:email/:lozinka', function(req, res) {
   //ovako uzimate parametre iz rute
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
   
   //query
-  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person);
   });  
 });
+
 
 routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
   var ime = req.params.ime;
