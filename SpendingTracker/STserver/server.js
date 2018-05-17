@@ -153,12 +153,13 @@ routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
 });
 
 
-routerAPI.post('/dodajNovuKategoriju/::email/:lozinka', function(req, res) {
+routerAPI.post('/dodajNovuKategoriju/:email/:lozinka', function(req, res) {
+  
   var nazivKategorije = req.body.naziv;
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   
-  var opts = { runValidators: true, context: 'query', new: true };
+   var opts = { runValidators: true, context: 'query', new: true };
 
   korisnik.findOneAndUpdate({'email': email, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts, 
   function(err, doc){

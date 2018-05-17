@@ -13,8 +13,8 @@ export default class Login extends React.Component {
   }
 
   onPressButton = () => {
-    //console.log('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
-     return fetch('http://192.168.1.16:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+    //console.log('http://192.168.1.16:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+     return fetch('http://192.168.2.104:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson);
