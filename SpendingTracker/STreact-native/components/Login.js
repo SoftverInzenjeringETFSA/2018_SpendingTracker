@@ -9,18 +9,22 @@ export default class Login extends React.Component {
     super(props);
     this.state = {email: '', password:''};
     
-  
+    this.person=null;
   }
 
   onPressButton = () => {
-    return fetch('http://192.168.1.207:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123 ')
+    console.log('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+     return fetch('http://192.168.56.1:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     .then((response) => response.json())
     .then((responseJson) => {
-      
+      console.log('nes');
+      console.log(responseJson);
+      this.person=responseJson;
     })
     .catch((error) => {
       console.error(error);
     });
+    console.log(this.person + " heh");
     }
 
   render() {
@@ -28,7 +32,7 @@ export default class Login extends React.Component {
       <KeyboardAvoidingView style={styles.container}>
         <Image 
           style={styles.imageContainer}
-        
+          source={require('../img/logo.png')}
         />
         <Text style={styles.header}>Dobrodošli</Text>
         <Text style={styles.header2}>HAFE Spending Tracker aplikacija</Text>
@@ -47,10 +51,10 @@ export default class Login extends React.Component {
           onChangeText={(text) => this.setState({password:text})}
         />
 
-
-        <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('Home')} title="Prijavi se"/>
-        
+        <View style={styles.button}>
+        <Button color="#343C47"   onPress={
+                /*this.props.navigation.navigate('Home')*/ this.onPressButton} title="Prijavi se"/>
+        </View>
 
           <Text 
          style={styles.register}>Nemate račun? Registruj se</Text>
@@ -66,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -180
+    marginTop: -200
   },
   header: {
     paddingTop:20,
@@ -88,15 +92,11 @@ const styles = StyleSheet.create({
     paddingHorizontal:10
   },
   button:{
-    marginTop: 25,
+    marginTop: 15,
     backgroundColor:'#343C47',
    // borderColor:'66CCFF',
     borderWidth: 1,
-    borderRadius:4,
-    paddingLeft:10,
-    paddingRight:10,
-    paddingTop:10,
-    paddingBottom:10
+    borderRadius:4
   },
   buttonText:{
     color:'white'
