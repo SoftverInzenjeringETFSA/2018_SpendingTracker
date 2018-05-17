@@ -125,7 +125,7 @@ routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
   
   korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
-    var datumi_iznosi = {};
+    var datumi_iznosi = [];
     var brojac=0;
     if (person!=null)
     for(i=0; i<person.racuni.length; i++) {
