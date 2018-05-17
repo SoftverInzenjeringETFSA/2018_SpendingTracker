@@ -102,6 +102,8 @@ var korisnikSchema = new Schema(
 
 var korisnik = mongoose.model('korisnik', korisnikSchema, 'korisnik');
 
+app.use(bodyParser.json());
+
 //primjer api rute, vraca korisnika s poslanim imenom, prezimenom i lozinkom (u JSON formatu vraćeni podaci)
 //ruta je localhost:8081/api/vratiKorisnika/:ime/:prezime/:lozinka
 routerAPI.get('/vratiKorisnika/:ime/:prezime/:lozinka', function(req, res) {
@@ -140,8 +142,18 @@ routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
   });  
 });
 
+routerAPI.get('/vratiKategorije/:ime/:prezime/:lozinka', function(req, res) {
+  var ime = req.params.ime;
+  var prezime = req.params.prezime;
+  var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
+  
+  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+    if (err) return handleError(err);
+    res.send(person.kategorije);
+  });  
+});
 
-app.use(bodyParser.json());
 
 routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res) {
   var nazivKategorije = req.body.naziv;
