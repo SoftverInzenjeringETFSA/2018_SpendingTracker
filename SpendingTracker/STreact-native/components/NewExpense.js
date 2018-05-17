@@ -1,7 +1,29 @@
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
 
 export class  NewExpense extends Component{
+  constructor(props){
+   
+    super(props);
+    this.state = { value: '', category:'' };
+
+  }
+
+  inputExpense=()=>{
+    
+    fetch('http://192.168.0.18:8081/api/dodajNoviTrosak/Neko/Nekoo/lozinka123/Racun1', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           kategorije: this.state.category,
+           iznos: this.state.value
+      }),
+    });
+  }
     render(){
         return (
             <View >
@@ -13,13 +35,15 @@ export class  NewExpense extends Component{
                     <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Novi trošak</Text>
                    </View>
                    <View style={styles.contentcontainer}>
-                    
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Text style={{color: '#343C47',marginLeft: 10, fontSize:15}}>Iznos</Text>
                     <TextInput
-                  style={styles.input}></TextInput></View>
+                      style={styles.input}
+                      onChangeText={(value) => this.setState({value})}></TextInput></View>
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Picker
+                    selectedValue={this.state.category}
+                    onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}
                     style={{ height: 50, width: 100,color:"#343C47" }}>
                     <Picker.Item label="Odjeca" value="Odjeca" />
                     <Picker.Item label="Namirnice" value="Namirnice" />
@@ -30,7 +54,7 @@ export class  NewExpense extends Component{
                   </Picker></View>
             </View>
             <View style={styles.buttonContainer}>
-                   <Button color="#343C47" style={styles.button} title="Unesi"/>   
+                   <Button color="#343C47" style={styles.button} title="Unesi" onPress={this.inputExpense}/>   
                     </View>
                   </View>
                 );

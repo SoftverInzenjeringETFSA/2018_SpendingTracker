@@ -12,11 +12,14 @@ export class Home extends Component{
                 <View style={styles.costcontainer}>
                 <Text style={styles.accountText}>300 KM</Text>
                 </View>
-                </View>
-                
+                </View>  
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
+                </View>
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('PregledKategorija')} title="Pregled kategorija"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
