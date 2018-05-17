@@ -3,6 +3,19 @@ import { Text } from 'react-native';
 import { Text, View, FlatList } from 'react-native';
 
 export default class PregledKategorije extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = [
+      {naziv: ""}
+    ];
+  }
+  componentDidMount(){
+    fetch('http://192.168.1.207:8081/api/vratiKategorije/neko@nekoo.com/lozinka123'
+    .then(response => response.json())
+    .then(data => this.setState( data )))  
+  }
+
   renderItem({ item, index }) {
     return <Text style={style.row}>{item}</Text>;
   }
@@ -27,7 +40,7 @@ export default class PregledKategorije extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <FlatList
-            data={listData}
+            data={this.state}
             renderItem={this.renderItem}
           />
         </View>

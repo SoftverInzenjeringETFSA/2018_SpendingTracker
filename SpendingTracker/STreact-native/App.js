@@ -13,7 +13,7 @@ export default class App extends React.Component {
   }
 
   onPressButton = () => {
-    return fetch('http://192.168.1.207:8081/api/vratiKorisnika/Neko/Nekoo/lozinka123 ')
+    return fetch('http://192.168.1.207:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123 ')
     .then((response) => response.json())
     .then((responseJson) => {
       

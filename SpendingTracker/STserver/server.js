@@ -142,28 +142,25 @@ routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
   });  
 });
 
-routerAPI.get('/vratiKategorije/:ime/:prezime/:lozinka', function(req, res) {
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
-  var racun = req.params.racun;
   
-  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+  korisnik.findOne({'email': email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person.kategorije);
   });  
 });
 
 
-routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res) {
+routerAPI.post('/dodajNovuKategoriju/::email/:lozinka', function(req, res) {
   var nazivKategorije = req.body.naziv;
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
   
   var opts = { runValidators: true, context: 'query', new: true };
 
-  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts, 
+  korisnik.findOneAndUpdate({'email': email, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send("succesfully saved");
@@ -172,8 +169,7 @@ routerAPI.post('/dodajNovuKategoriju/:ime/:prezime/:lozinka', function(req, res)
 
 // route middleware za validaciju :kategorija
 routerAPI.param('kategorija', function(req, res, next, kategorija) {
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
   //kategorija moze imati samo slova i brojeve (i _)
   if(!/^\w+$/.test(kategorija)) {
@@ -181,7 +177,7 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
    .send('Bad request');
   }
   //provjere
-  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     if(person.kategorije.length == 0){
       res.status(403)       
@@ -201,23 +197,21 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
 });
 
 
-routerAPI.get('/ukloniKategoriju/:ime/:prezime/:lozinka/:kategorija', function(req, res) {
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+routerAPI.get('/ukloniKategoriju/:email/:kategorija', function(req, res) {
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
   var kategorija = req.params.kategorija;
 
-  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send("succesfully saved");
   });
 });
 
-routerAPI.post('/dodajNoviTrosak/:ime/:prezime/:lozinka/:racun', function(req, res) {
+routerAPI.post('/dodajNoviTrosak/:email/:lozinka/:racun', function(req, res) {
   var iznos = req.body.iznos;
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
   var racun = req.params.racun;
   var kategorija = req.body.kategorija;
@@ -229,7 +223,7 @@ routerAPI.post('/dodajNoviTrosak/:ime/:prezime/:lozinka/:racun', function(req, r
   imenom, prezimenom i lozinkom koji su poslani kao parametri u GET metodi, onda se odabire racun koji ima naziv
   kao sto je poslan parametar ('racuni.naziv': racun) zatim se push-a novi objekat na listu racuna koji je 
   odabran(za to sluzi ovaj operator $ da bi se odabrao taj nadjeni racun iz prethodnog koraka)*/
-  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka, 'racuni.naziv': racun},
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
   {$push:{'racuni.$.troskovi': {'iznos': iznos, 'datum': danas, 'kategorija': {'naziv': kategorija}}}}, opts, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
