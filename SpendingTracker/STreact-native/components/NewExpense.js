@@ -21,8 +21,12 @@ export class  NewExpense extends Component{
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Picker
                     style={{ height: 50, width: 100,color:"#343C47" }}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
+                    <Picker.Item label="Odjeca" value="Odjeca" />
+                    <Picker.Item label="Namirnice" value="Namirnice" />
+                    <Picker.Item label="Zabava" value="Zabava" />
+                    <Picker.Item label="Pokloni" value="Pokloni" />
+                    <Picker.Item label="Kućanstvo" value="Kućanstvo" />
+                   
                   </Picker></View>
             </View>
             <View style={styles.buttonContainer}>
