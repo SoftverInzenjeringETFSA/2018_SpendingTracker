@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
 
 export class  NewExpense extends Component{
     render(){
@@ -10,34 +10,24 @@ export class  NewExpense extends Component{
                   style={{width: 200, height: 100}}
                   source={require('../img/money.png')}
                     />
-                    <Text style={{color: '#1a1a1a', fontWeight: 'bold', fontSize:25}}>Novi trošak</Text>
+                    <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Novi trošak</Text>
                    </View>
                    <View style={styles.contentcontainer}>
                     
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                    <Text style={{color: '#1a1a1a', fontSize:15}}>Iznos</Text>
+                    <Text style={{color: '#343C47',marginLeft: 10, fontSize:15}}>Iznos</Text>
                     <TextInput
                   style={styles.input}></TextInput></View>
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                    <Text style={{color: '#1a1a1a', fontSize:15}}>Kategorija</Text>
-                    <TextInput
-                    style={styles.input}></TextInput></View>
-                   <Button
-              title="UNESI"
-             loading
-              loadingProps={{ size: "large", color: '#343C47' }}
-              titleStyle={{ fontWeight: "700" }}
-              buttonStyle={{
-                backgroundColor: '#343C47',
-                width: 1300,
-                height: 245,
-                borderColor: "transparent",
-                borderWidth: 0,
-                borderRadius: 5
-              }}
-             
-            />
+                    <Picker
+                    style={{ height: 50, width: 100,color:"#343C47" }}>
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                  </Picker></View>
             </View>
+            <View style={styles.buttonContainer}>
+                   <Button color="#343C47" style={styles.button} title="Unesi"/>   
+                    </View>
                   </View>
                 );
               }
@@ -56,16 +46,21 @@ export class  NewExpense extends Component{
             
             const styles = StyleSheet.create({
               imagecontainer: {
-              /*  flex: 1,
-                backgroundColor: '#F0FFFF',*/
                 alignItems: 'center'
-
-               /* justifyContent: 'center',*/
               },
               contentcontainer:{
                 alignItems: 'flex-start',
                 padding: 20
               },
+              buttonContainer:{
+                marginBottom:8
+            },
+            button:{
+              backgroundColor:'#343C47',
+              color:'white',
+              width:320,
+              marginBottom:5
+          },
               container: {
                 flex: 1,
                 width:200,
@@ -76,10 +71,9 @@ export class  NewExpense extends Component{
               input:{
                 height:35,
                 marginBottom:10,
+                marginLeft: 10,
                 backgroundColor: 'transparent',
-                width:300
-
-
+                width:200
               }
             });
 export default NewExpense;
