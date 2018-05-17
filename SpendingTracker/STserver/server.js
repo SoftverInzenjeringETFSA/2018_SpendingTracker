@@ -111,7 +111,7 @@ routerAPI.get('/ukloniKategoriju/:ime/:prezime/:lozinka/:kategorija', function(r
 });
 
 routerAPI.post('/dodajNoviTrosak/:ime/:prezime/:lozinka/:racun', function(req, res) {
-  var trosak = req.body.trosak;
+  var iznos = req.body.iznos;
   var ime = req.params.ime;
   var prezime = req.params.prezime;
   var lozinka = req.params.lozinka;
@@ -119,8 +119,12 @@ routerAPI.post('/dodajNoviTrosak/:ime/:prezime/:lozinka/:racun', function(req, r
   var kategorija = req.body.kategorija;
   var danas = new Date();
 
-  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka, 'racun': racun},
-  {$push:{'troskovi': {'iznos': trosak, 'date': danas, 'kategorija': {'naziv': kategorija}}}}, {new: true}, 
+  //kompleksniji query ako nekom bude trebalo za rutu, 
+  //traži se korisnik s imenom, prezimenom i lozinkom koji su poslani kao parametri u GET metodi,
+  // onda se odabire racun koji ima naziv kao sto je poslan parametar zatim se push-a novi objekat
+  // na listu racuna koji je odabran(za to sluzi ovaj operator $ da bi se odabrao taj nadjeni racun)
+  korisnik.findOneAndUpdate({'ime':ime, 'prezime': prezime, 'lozinka': lozinka, 'racuni.naziv': racun},
+  {$push:{'racuni.$.troskovi': {'iznos': iznos, 'datum': danas, 'kategorija': {'naziv': kategorija}}}}, {new: true}, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send("Dodan novi trošak");
