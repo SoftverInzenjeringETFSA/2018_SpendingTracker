@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 
 export class Home extends Component{
+    onPressButton= () =>{
+        this.props.navigation.navigate('Login');
+    }
     render(){
         return (
             <View>
+                <View style={styles.logout}>
+                    <Button color="#343C47"   onPress={
+                    this.onPressButton} title="Odjavi se"/>
+                 </View>
                 <View style={styles.imagecontainer}>
                 <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Trenutno stanje</Text>
                 </View>
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     },
    costcontainer:{
        width:320,
-       height:220,
+       height:200,
         alignItems: 'center',
         padding: 20,
         borderWidth: 2,
@@ -86,6 +93,10 @@ const styles = StyleSheet.create({
     accountText:{
         color:'white',
         fontSize: 30
+    },
+    logout:{
+        width: 100,
+        marginLeft:130
     }
   });
 
