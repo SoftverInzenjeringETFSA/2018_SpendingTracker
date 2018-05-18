@@ -13,6 +13,7 @@ export class  NewExpense extends Component{
 
   inputExpense=()=>{
     //192.168.1.5
+    this.props.navigation.navigate('ObavjestOLimitu',{trosak:this.state.value});
     fetch('http://192.168.1.5:8081/api/dodajNoviTrosak/Neko/Nekoo/lozinka123/Racun1', {
       method: 'POST',
       headers: {

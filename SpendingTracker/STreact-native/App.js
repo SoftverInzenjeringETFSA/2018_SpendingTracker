@@ -12,6 +12,7 @@ import PregledKategorija from './components/PregledKategorija';
 import unoskategorijzacija from './components/unoskategorizacija'
 import Login from './components/Login';
 import HistorijaTroskova from './components/HistorijaTroskova';
+import ObavjestOLimitu from './components/ObavjestOLimitu';
 import {Navigation, StackNavigator} from 'react-navigation';
 
 const AppNavigator = StackNavigator({
@@ -25,7 +26,8 @@ const AppNavigator = StackNavigator({
     LineChart: {screen: LineChart},
     PieChart: {screen: PieChart},
     PregledKategorija: {screen: PregledKategorija},
-    unoskategorijzacija: {screen: unoskategorijzacija}
+    unoskategorijzacija: {screen: unoskategorijzacija},
+    ObavjestOLimitu: {screen: ObavjestOLimitu}
     
   });
 export default class App extends React.Component {
