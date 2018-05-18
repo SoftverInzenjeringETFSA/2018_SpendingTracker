@@ -119,13 +119,11 @@ routerAPI.get('/vratiKorisnika/:email/:lozinka', function(req, res) {
 });
 
 
-routerAPI.get('/vratiHistoriju/:ime/:prezime/:lozinka', function(req, res) {
-  var ime = req.params.ime;
-  var prezime = req.params.prezime;
+routerAPI.get('/vratiHistoriju/:email/:lozinka', function(req, res) {
+  var email = req.params.email;
   var lozinka = req.params.lozinka;
-  var racun = req.params.racun;
   
-  korisnik.findOne({'ime':ime, 'prezime': prezime, 'lozinka': lozinka}, function (err, person) {
+  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     var datumi_iznosi = [];
     var brojac=0;

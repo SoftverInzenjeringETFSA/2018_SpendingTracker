@@ -15,10 +15,14 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.0.18:8081/api/HistroijaTroskova/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.5:8081/api/vratiHistoriju/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({historija: data}))
   }
+
+  //renderItem({ item, index }) {
+  //  return <Text style={styles.row}>{item.iznos}</Text>;
+  //}
 
     render() {
       return (
@@ -28,7 +32,7 @@ export default class HistorijaTroskova extends React.Component {
             <View style={styles.buttonContainer}>
                 <FlatList
                 data={this.state.historija}
-                renderItem={this.renderItem}
+                renderItem={({item}) => <Text>Iznos: {item.iznos}, datum unosa:  {item.datum}</Text>}
                 >
 
                     </FlatList>
