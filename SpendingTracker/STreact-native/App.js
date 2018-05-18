@@ -27,7 +27,8 @@ const AppNavigator = StackNavigator({
     PieChart: {screen: PieChart},
     PregledKategorija: {screen: PregledKategorija},
     unoskategorijzacija: {screen: unoskategorijzacija},
-    ObavjestOLimitu: {screen: ObavjestOLimitu}
+    ObavjestOLimitu: {screen: ObavjestOLimitu},
+    HistorijaTroskova: {screen: HistorijaTroskova}
     
   });
 export default class App extends React.Component {

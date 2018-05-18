@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, StyleSheet, Image, TextInput, Button } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 export default class PregledKategorije extends Component {
 
@@ -13,14 +14,14 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.7:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.0.18:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({kategorije: data}))
   }
 
   novaKategorija=() => {
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
+    fetch('http://192.168.0.18:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -30,9 +31,8 @@ export default class PregledKategorije extends Component {
            naziv: this.state.unos
       }),
     });
-
+    Toast.show("Uspješno ste dodali novu kategoriju");
   }
-
   renderItem({ item, index }) {
     return <Text style={styles.row}>{item.naziv}</Text>;
   }

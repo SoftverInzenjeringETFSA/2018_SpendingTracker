@@ -7,14 +7,21 @@ export class  NewExpense extends Component{
   constructor(props){
    
     super(props);
-    this.state = { value: '', category:'' };
+    this.state = { value: '', category:'',currentValue:'' };
 
   }
-
+  componentDidMount(){
+    //192.168.1.5
+  
+    fetch('http://192.168.0.18:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+    .then(response => response.json())
+    .then(data => this.setState({currentValue: data.trenutniIznos}));
+    
+  }
   inputExpense=()=>{
     //192.168.1.5
     this.props.navigation.navigate('ObavjestOLimitu',{trosak:this.state.value});
-    fetch('http://192.168.1.7:8081/api/dodajNoviTrosak/Neko/Nekoo/lozinka123/Racun1', {
+    fetch('http://192.168.0.18:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -23,6 +30,18 @@ export class  NewExpense extends Component{
            body: JSON.stringify({
            kategorije: this.state.category,
            iznos: this.state.value
+      }),
+      
+    });
+    fetch('http://192.168.0.18:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           noviIznos: (+this.state.currentValue) - (+this.state.value),
+          
       }),
       
     });
