@@ -11,6 +11,7 @@ import PieChart from './components/charts/PieChart';
 import PregledKategorija from './components/PregledKategorija';
 import unoskategorijzacija from './components/unoskategorizacija'
 import Login from './components/Login';
+import HistorijaTroskova from './components/HistorijaTroskova';
 import {Navigation, StackNavigator} from 'react-navigation';
 
 const AppNavigator = StackNavigator({

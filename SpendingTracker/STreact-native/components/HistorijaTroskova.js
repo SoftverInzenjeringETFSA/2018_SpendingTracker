@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 import { ListView } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 
-export default class PregledStatistike extends React.Component {
+export default class HistorijaTroskova extends React.Component {
 
   constructor(props){
     super(props);
@@ -25,7 +25,10 @@ export default class PregledStatistike extends React.Component {
           <View style={styles.imagecontainer}>
             </View>
             <View style={styles.buttonContainer}>
-                <FlatList>
+                <FlatList
+                data={this.state.historija}
+                renderItem={this.renderItem}
+                >
 
                     </FlatList>
                 </View>
