@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
-import Toast, {DURATION} from 'react-native-easy-toast'
 import Toast from 'react-native-simple-toast';
 
 export default class ObavjestOLimitu extends Component{
@@ -17,7 +16,7 @@ export default class ObavjestOLimitu extends Component{
         .then(response => response.json())
         .then(data => this.setState( data, function(){
             Toast.show("Dosegnut limit", Toast.LONG);
-            if(this.state.trosak+data.mjesecniprihod<data.troskovniLimit){
+            if(this.state.trosak+data.mjesecniprihod>data.troskovniLimit){
                 
             }
         } ))  

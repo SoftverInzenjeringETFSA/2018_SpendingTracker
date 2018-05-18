@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
-import { ListView } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
-import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
+//import { ListView } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
+//import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 
 export default class HistorijaTroskova extends React.Component {
 
@@ -14,7 +14,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/HistroijaTroskova/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.7:8081/api/HistroijaTroskova/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({historija: data}))
   }

@@ -1,5 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 1332
+  "packagerPid": 1840,
+  "expoServerNgrokUrl": "https://y5-nz3.mkapo1.streact-native.exp.direct",
+  "packagerNgrokUrl": "https://packager.y5-nz3.mkapo1.streact-native.exp.direct",
+  "ngrokPid": 2280
 }
