@@ -232,6 +232,38 @@ routerAPI.post('/dodajNoviTrosak/:email/:lozinka/:racun', function(req, res) {
   });
 });
 
+routerAPI.get('/trenutnoStanje/:email/:lozinka/:racun', function(req,res){
+  var email = req.params.email;
+  var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
+
+    korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
+      if (err) return handleError(err);
+      var tajRacun = person.racuni.find(rac => {return rac.naziv == racun});
+     return res.send({'trenutniIznos': tajRacun.trenutniIznos});
+    });  
+
+});
+
+
+
+routerAPI.post('/novoStanje/:email/:lozinka/:racun', function(req,res){
+  var noviIznos = req.body.noviIznos;
+
+  var email = req.params.email;
+  var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
+
+  var opts = { runValidators: true, context: 'query', new: true };
+  
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
+  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts, 
+  function(err, person){
+    if (err) return res.send(500, { error: err });
+    return res.send("Umanjen iznos");
+  });
+});
+
 
 app.get('/', function (req, res) {
 
