@@ -4,6 +4,21 @@ import { ListView } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.
 import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 
 export default class PregledStatistike extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state ={
+      hiostorija: []
+    };
+  }
+
+  componentDidMount(){
+    //192.168.1.5
+    fetch('http://192.168.1.5:8081/api/HistroijaTroskova/neko@nekoo.com/lozinka123')
+    .then(response => response.json())
+    .then(data => this.setState({historija: data}))
+  }
+
     render() {
       return (
         <View>

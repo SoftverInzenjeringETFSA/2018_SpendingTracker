@@ -29,8 +29,13 @@ export class Home extends Component{
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('PregledStatistike')} title="Pregled statistike"/>
                 </View>
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('HistorijaTroskova')} title="Historija troskova"/>
+                </View>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
+                
                 </View>
             </View>
         );

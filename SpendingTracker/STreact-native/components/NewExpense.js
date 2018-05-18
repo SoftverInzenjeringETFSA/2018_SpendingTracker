@@ -12,8 +12,8 @@ export class  NewExpense extends Component{
   }
 
   inputExpense=()=>{
-    
-    fetch('http://192.168.0.18:8081/api/dodajNoviTrosak/Neko/Nekoo/lozinka123/Racun1', {
+    //192.168.1.5
+    fetch('http://192.168.1.5:8081/api/dodajNoviTrosak/Neko/Nekoo/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
