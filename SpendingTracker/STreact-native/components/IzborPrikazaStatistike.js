@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 
 export default class IzborPrikazaStatistike extends React.Component {
+  
     render() {
+    const { navigation } = this.props;
+    const historija = navigation.getParam('historija', '');
       return (
         <View>
             <View style={styles.imagecontainer}>
@@ -13,15 +16,15 @@ export default class IzborPrikazaStatistike extends React.Component {
             </View>
             <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('BarChart')} title="Bar Chart"/>
+                this.props.navigation.navigate('BarChart', {historija: historija})} title="Bar Chart"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('LineChart')} title="Line Chart"/>   
+                this.props.navigation.navigate('LineChart', {historija: historija})} title="Line Chart"/>   
                 </View> 
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('PieChart')} title="Pie Chart"/>   
+                this.props.navigation.navigate('PieChart', {historija: historija})} title="Pie Chart"/>   
                 </View>
         </View>
       );

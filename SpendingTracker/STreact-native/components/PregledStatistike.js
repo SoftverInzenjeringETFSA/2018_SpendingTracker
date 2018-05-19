@@ -2,6 +2,35 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 
 export default class PregledStatistike extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
+        historija: [
+            {
+                value: 0,
+                label: ' '
+            }
+        ]
+    };
+  }
+  componentDidMount(){
+    //192.168.1.5
+    fetch('http://192.168.1.2:8081/api/vratiSveRacune/neko@nekoo.com/lozinka123')
+    .then(response => response.json())
+    .then((data) =>  {
+        this.setState({historija: data});
+    }, (error) => {
+        this.setState({
+            historija: [
+                {
+                    value: 0,
+                    label: ' ',
+                }
+            ]
+        });
+    }
+    )
+  }
     render() {
       return (
         <View>
@@ -13,11 +42,11 @@ export default class PregledStatistike extends React.Component {
             </View>
             <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Godisnji"/>
+                this.props.navigation.navigate('IzborPrikazaStatistike', {historija: this.state.historija})} title="Godisnji"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Mjesecni"/>   
+                this.props.navigation.navigate('IzborMjeseca')} title="Mjesecni"/>   
                 </View> 
         </View>
       );

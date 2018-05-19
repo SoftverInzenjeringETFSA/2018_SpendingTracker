@@ -1,36 +1,17 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { View } from 'react-native'
 import { BarChart, Grid, YAxis } from 'react-native-svg-charts'
 import * as scale from 'd3-scale'
 
-class HorizontaBarChartWithYAxis extends React.PureComponent {
+export default class HorizontaBarChartWithYAxis extends React.Component {
+    constructor(props){
+        super(props);
+      }
 
     render() {
-
-        const data = [
-            {
-                value: 50,
-                label: 'One',
-            },
-            {
-                value: 10,
-                label: 'Two',
-            },
-            {
-                value: 40,
-                label: 'Three',
-            },
-            {
-                value: 95,
-                label: 'Four',
-            },
-            {
-                value: 85,
-                label: 'Five',
-            },
-        ]
-
-
+        const { navigation } = this.props;
+        const data= navigation.getParam('historija', '');
+        console.log(data);
         return (
             <View style={{ flexDirection: 'row', height: 200, paddingVertical: 16 }}>
                 <YAxis
@@ -58,5 +39,3 @@ class HorizontaBarChartWithYAxis extends React.PureComponent {
     }
 
 }
-
-export default HorizontaBarChartWithYAxis

@@ -5,6 +5,7 @@ import DevelopersHelp from './components/DevelopersHelp';
 import Home from './components/Home';
 import NewExpense from './components/NewExpense';
 import IzborPrikazaStatistike from './components/IzborPrikazaStatistike';
+import IzborMjeseca from './components/IzborMjeseca';
 import BarChart from './components/charts/BarChart';
 import LineChart from './components/charts/LineChart';
 import PieChart from './components/charts/PieChart';
@@ -22,6 +23,7 @@ const AppNavigator = StackNavigator({
     NewExpense: {screen: NewExpense},
     PregledStatistike: {screen: PregledStatistike},
     IzborPrikazaStatistike: {screen: IzborPrikazaStatistike},
+    IzborMjeseca: {screen: IzborMjeseca},
     BarChart: {screen: BarChart},
     LineChart: {screen: LineChart},
     PieChart: {screen: PieChart},

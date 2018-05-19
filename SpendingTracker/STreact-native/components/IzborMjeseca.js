@@ -1,57 +1,73 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput, Image, Picker} from 'react-native';
 
 export default class IzborPrikazaStatistike extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            historija: [
+                {
+                    value: 0,
+                    label: ' '
+                }
+            ],
+            mjesec: 'Januar',
+            pritisnuto: false
+        };
+      }
+      onPressButton = () =>{
+        //192.168.1.5
+        this.setState({pritisnuto:true});
+        this.componentDidMount();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.historija !== this.state.historija)
+            if(this.state.pritisnuto === true) {
+                this.setState({pritisnuto:false});
+                this.props.navigation.navigate('IzborPrikazaStatistike', {historija: this.state.historija});
+            }
+    }
+    componentDidMount() {
+        fetch('http://192.168.1.2:8081/api/vratiSveRacuneMjesec/neko@nekoo.com/lozinka123/' + this.state.mjesec)
+        .then(response => response.json())
+        .then((data) =>  {
+            this.setState({historija: data});
+        }, (error) => {
+            this.setState({
+                historija: [
+                    {
+                        value: 0,
+                        label: 'amila',
+                    }
+                ]
+            });
+        }
+        );
+        console.log(this.state.historija);
+    }
     render() {
       return (
         <View>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                    <Picker
+                    selectedValue={this.state.mjesec}
+                    onValueChange={(itemValue, itemIndex) => this.setState({mjesec: itemValue})}
+                    style={{ height: 50, width: 200,color:"#343C47" }}>
+                    <Picker.Item label="Januar" value="0" />
+                    <Picker.Item label="Februar" value="1" />
+                    <Picker.Item label="Mart" value="2" />
+                    <Picker.Item label="April" value="3" />
+                    <Picker.Item label="Maj" value="4" />
+                    <Picker.Item label="Juni" value="5" />
+                    <Picker.Item label="Juli" value="6" />
+                    <Picker.Item label="August" value="7" />
+                    <Picker.Item label="Sepetembar" value="8" />
+                    <Picker.Item label="Oktobar" value="9" />
+                    <Picker.Item label="Novembar" value="10" />
+                    <Picker.Item label="Decembar" value="11" />
+                  </Picker></View>
             <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Januar"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Februar"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Mart"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="April"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Maj"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Juni"/>
-                </View>    
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Juli"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="August"/>
-                </View>    
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Septembar"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Oktobar"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Novembar"/>
-                </View>
-            <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('IzborPrikazaStatistike')} title="Decembar"/>
+                <Button color="#343C47" style={styles.button} onPress={this.onPressButton} title="Potvrdi"/>
                 </View>
         </View>
       );

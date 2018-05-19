@@ -140,10 +140,97 @@ routerAPI.get('/vratiHistoriju/:email/:lozinka', function(req, res) {
   });  
 });
 
-routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
+routerAPI.get('/vratiSveRacune/:email/:lozinka', function(req, res) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   
+  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
+    if (err) return handleError(err);
+    var iznosi = [{
+      value: 0,
+      label: "Nepoznato"
+    }];
+    var brojac=1;
+    if (person!=null)
+    for(i=0; i<person.racuni.length; i++) {
+      for(j=0; j<person.racuni[i].troskovi.length; j++) {
+        var found = false;
+        var indeks = 0;
+        if(person.racuni[i].troskovi[j].kategorija.naziv == null) {
+          iznosi[0].value += person.racuni[i].troskovi[j].iznos;
+        } else {
+        for(var k = 0; k < iznosi.length; k++) {
+            if (iznosi[k].label == person.racuni[i].troskovi[j].kategorija.naziv) {
+                found = true;
+                indeks = k;
+                break;
+            }
+        }
+        if(found == false) {
+          iznosi[brojac] = {
+            value:person.racuni[i].troskovi[j].iznos,
+            label: person.racuni[i].troskovi[j].kategorija.naziv
+            }
+          brojac++;
+        } else {
+          iznosi[indeks].value += person.racuni[i].troskovi[j].iznos;
+        }
+      }
+      }
+    }
+    res.send(iznosi);
+  });  
+});
+
+routerAPI.get('/vratiSveRacuneMjesec/:email/:lozinka/:mjesec', function(req, res) {
+  var email = req.params.email;
+  var lozinka = req.params.lozinka;
+  var mjesec = req.params.mjesec.toString();
+
+  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
+    if (err) return handleError(err);
+    var iznosi = [{
+      value: 0,
+      label: "Nepoznato"
+    }];
+    var brojac=1;
+    if (person!=null)
+    for(i=0; i<person.racuni.length; i++) {
+      for(j=0; j<person.racuni[i].troskovi.length; j++) {
+        var datum = (person.racuni[i].troskovi[j].datum).getMonth().toString() + "";
+        if(datum.indexOf(mjesec)> -1) {
+          var found = false;
+          var indeks = 0;
+          if(person.racuni[i].troskovi[j].kategorija.naziv == null) {
+            iznosi[0].value += person.racuni[i].troskovi[j].iznos;
+          } else {
+            for(var k = 0; k < iznosi.length; k++) {
+                if (iznosi[k].label == person.racuni[i].troskovi[j].kategorija.naziv) {
+                    found = true;
+                    indeks = k;
+                    break;
+                }
+            }
+            if(found == false) {
+                iznosi[brojac] = {
+                value:person.racuni[i].troskovi[j].iznos,
+                label: person.racuni[i].troskovi[j].kategorija.naziv
+                }
+              brojac++;
+            } else {
+              iznosi[indeks].value += person.racuni[i].troskovi[j].iznos;
+            }
+          }
+        }
+      }
+    }
+    res.send(iznosi);
+  });  
+});
+
+routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
+  var email = req.params.email;
+  var lozinka = req.params.lozinka;
   korisnik.findOne({'email': email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person.kategorije);
