@@ -5,18 +5,19 @@ export class Home extends Component{
     constructor(props){
         
          super(props);
-         this.state = { currentValue:'hhh' };
+         this.state = { currentValue: 230 };
        this.value=230;
        }
     componentDidMount(){
         //192.168.1.5
       
-        fetch('http://192.168.1.5:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+        fetch('http://192.168.1.53:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
         .then(response => response.json())
         .then((responseJson) => {
             console.log(responseJson.trenutniIznos);
-            this.value=responseJson.trenutniIznos.toString();
-           console.log(this.value + "hi");
+            //this.value=responseJson.trenutniIznos.toString();
+            this.setState({currentValue: data.trenutniIznos})
+            console.log(this.currentValue + "hi");
           })
      
       }
@@ -35,7 +36,7 @@ export class Home extends Component{
                 </View>
                 <View style={styles.contentcontainer}>
                 <View style={styles.costcontainer}>
-                <Text style={styles.accountText}>{this.value}  KM</Text>
+                <Text style={styles.accountText}>{this.state.currentValue}  KM</Text>
                 </View>
                 </View>  
                 <View style={styles.buttonContainer}>

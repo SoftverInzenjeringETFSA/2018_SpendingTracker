@@ -15,7 +15,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/vratiHistoriju/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.53:8081/api/vratiHistoriju/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({historija: data}))
   }
@@ -32,7 +32,7 @@ export default class HistorijaTroskova extends React.Component {
             <View style={styles.buttonContainer}>
                 <FlatList
                 data={this.state.historija}
-                renderItem={({item}) => <Text>Iznos: {item.iznos}, datum unosa:  {item.datum}</Text>}
+                renderItem={({item}) => <Text style={styles.row} >Iznos: {item.iznos}, datum unosa:  {item.datum}</Text>}
                 >
 
                     </FlatList>
@@ -42,25 +42,60 @@ export default class HistorijaTroskova extends React.Component {
     }
   }
   
+  const dugmad = StyleSheet.create({
+    container:{
+      backgroundColor: "rgba(92, 99,216, 1)",
+      width: 300,
+      height: 45,
+      borderColor: "transparent",
+     borderWidth: 0,
+      borderRadius: 5
+    }
+  });
+  
   const styles = StyleSheet.create({
+    imagecontainer: {
+      alignItems: 'center'
+    },
+    contentcontainer:{
+      alignItems: 'flex-start',
+      padding: 20
+    },
+    buttonContainer:{
+      marginBottom:8
+  },
+  row:{
+    color: '#343C47',
+    marginLeft: 10, 
+    fontSize:15,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#6FAD4A',
+    marginBottom: 10,
+    marginRight: 10,
+    padding: 10,
+    textAlign: 'center'
+  },
+  button:{
+    backgroundColor:'#343C47',
+    color:'white',
+    width:320,
+    alignSelf: 'stretch',
+    marginBottom:5
+},
     container: {
       flex: 1,
+      width:200,
       backgroundColor: '#F0FFFF',
       alignItems: 'center',
       justifyContent: 'center',
     },
-    buttonContainer:{
-        marginBottom:8,
-        marginTop: 8
-    },
-    button:{
-      backgroundColor:'#343C47',
-      color:'white',
-      width:320,
-      marginBottom:5
-  },
-  imagecontainer: {
-    alignItems: 'center'
-  },
+    input:{
+      height:35,
+      marginBottom:10,
+      marginLeft: 10,
+      backgroundColor: 'transparent',
+      width:200
+    }
   });
-  
+

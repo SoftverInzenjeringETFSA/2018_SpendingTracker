@@ -14,14 +14,14 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.53:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({kategorije: data}))
   }
 
   novaKategorija=() => {
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
+    fetch('http://192.168.1.53:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

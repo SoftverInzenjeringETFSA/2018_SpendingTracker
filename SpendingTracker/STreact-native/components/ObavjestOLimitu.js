@@ -12,12 +12,12 @@ export default class ObavjestOLimitu extends Component{
     }
 
     componentDidMount(){
-        fetch('http://192.168.0.18:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+        fetch('http://192.168.1.53:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
         .then(response => response.json())
         .then(data => this.setState( data, function(){
-            Toast.show("Dosegnut limit", Toast.LONG);
-            if(this.state.trosak+data.mjesecniprihod>data.troskovniLimit){
-                
+            
+            if(this.state.trosak+data.mjesecniPrihod>data.troskovniLimit){
+                Toast.show("Dosegnut limit", Toast.LONG);    
             }
         } ))  
       }

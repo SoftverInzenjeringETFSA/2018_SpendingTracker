@@ -13,7 +13,7 @@ export class  NewExpense extends Component{
   componentDidMount(){
     //192.168.1.5
   
-    fetch('http://192.168.0.18:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+    fetch('http://192.168.1.53:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
     .then(response => response.json())
     .then(data => this.setState({currentValue: data.trenutniIznos}));
     
@@ -21,7 +21,7 @@ export class  NewExpense extends Component{
   inputExpense=()=>{
     //192.168.1.5
     this.props.navigation.navigate('ObavjestOLimitu',{trosak:this.state.value});
-    fetch('http://192.168.0.18:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.1.53:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -33,7 +33,7 @@ export class  NewExpense extends Component{
       }),
       
     });
-    fetch('http://192.168.0.18:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.1.53:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
