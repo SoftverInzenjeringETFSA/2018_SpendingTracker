@@ -33,15 +33,19 @@ export default class PregledKategorije extends Component {
     });
     Toast.show("Uspješno ste dodali novu kategoriju");
   }
-  renderItem({ item, index }) {
-    return <View style={styles.row}>
-      <Text style = {{padding: 10, textAlign: 'center'}} >{item.naziv}</Text>
-      <Button color="#343C47" style={styles.button} title="Ukloni kategoriju"/>
-      </View>;
+
+  ukloniKategoriju=(kat) => {
+    
+    fetch('http://192.168.2.104:8081/api/ukloniKategoriju/neko@nekoo.com/lozinka123/'+ kat)
+    .then(response => response.json())
+
+    Toast.show(kat + " - kategorija uklonjena");
+    //.then(data => this.setState({kategorije: data}))
   }
+  
   render() {
     return (
-        <View >
+        <ScrollView >
         <View style={styles.imagecontainer}>
         <Image
                   style={{width: 80, height: 80, marginBottom: 10, marginTop: 10}}
@@ -60,14 +64,17 @@ export default class PregledKategorije extends Component {
                 <Button color="#343C47" style={styles.button} title="Unesi" onPress={this.novaKategorija}/>
               </View>     
         </View>
-        <ScrollView >
+        <View >
           <FlatList
-          
+
             data={this.state.kategorije}
-            renderItem={this.renderItem}
+            renderItem={({item}) => <View style={styles.row}>
+            <Text style = {{fontSize:15, padding: 10, textAlign: 'center', color: '#343C47'}} >{item.naziv}</Text>
+            <Button color="#343C47" style={styles.button} title="Ukloni kategoriju" onPress = {() => this.ukloniKategoriju(item.naziv)}/>
+            </View>}
           />
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
           );
         }
       }
@@ -94,16 +101,13 @@ export default class PregledKategorije extends Component {
           marginBottom:8
       },
       row:{
-        color: '#343C47',
         marginLeft: 10, 
-        fontSize:15,
         borderRadius: 4,
         borderWidth: 1,
         borderColor: '#6FAD4A',
         marginBottom: 10,
         marginRight: 10,
-        padding: 10,
-        textAlign: 'center'
+        padding: 10
       },
       button:{
         backgroundColor:'#343C47',

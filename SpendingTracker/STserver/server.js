@@ -254,7 +254,7 @@ routerAPI.post('/dodajNovuKategoriju/:email/:lozinka', function(req, res) {
 });
 
 // route middleware za validaciju :kategorija
-routerAPI.param('kategorija', function(req, res, next, kategorija) {
+/*routerAPI.param('kategorija', function(req, res, next, kategorija) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   //kategorija moze imati samo slova i brojeve (i _)
@@ -281,9 +281,9 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
   });
   req.kategorija = kategorija;
 });
+*/
 
-
-routerAPI.get('/ukloniKategoriju/:email/:kategorija', function(req, res) {
+routerAPI.get('/ukloniKategoriju/:email/:lozinka/:kategorija', function(req, res) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   var kategorija = req.params.kategorija;
@@ -291,7 +291,7 @@ routerAPI.get('/ukloniKategoriju/:email/:kategorija', function(req, res) {
   korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
-    return res.send("succesfully saved");
+    return res.send(doc.kategorije);
   });
 });
 
