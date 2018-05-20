@@ -6,6 +6,7 @@ export default class PregledKategorije extends Component {
 
   constructor(props){
     super(props);
+    console.log('kategorije ' +this.props.navigation.state.params.email + ' ' +this.props.navigation.state.params.lozinka);
     this.state ={
       kategorije: [],
       unos: ""
@@ -14,7 +15,17 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.2.104:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.2.104:8081/api/vratiKategorije', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           email: this.props.navigation.state.params.email,
+           lozinka: this.props.navigation.state.params.lozinka
+      }),
+    })
     .then(function(response) {
       if (!response.ok) {
         response.json().then(function(data) {
@@ -29,31 +40,76 @@ export default class PregledKategorije extends Component {
   }
 
   update(){
-    fetch('http://192.168.2.104:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
-    .then(response => response.json())
-    .then(data => this.setState({kategorije: data}))
-    
-  }
-
-  
-
-  novaKategorija=() => {
-    //192.168.1.5
-    fetch('http://192.168.2.104:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
+    fetch('http://192.168.2.104:8081/api/vratiKategorije', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
            body: JSON.stringify({
-           naziv: this.state.unos
+           email: this.props.navigation.state.params.email,
+           lozinka: this.props.navigation.state.params.lozinka
       }),
-    });
-    this.update();
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        response.json().then(function(data) {
+          console.log(response.status + ' ' +data.error);
+          Toast.show(response.status + ' ' + data.error);
+        });
+      
+      }
+      return response.json();
+    })
+    .then(data => this.setState({kategorije: data}))
+  
+  }
+
+  
+
+  novaKategorija=() => {
+    //192.168.1.5
+    fetch('http://192.168.2.104:8081/api/dodajNovuKategoriju', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           naziv: this.state.unos,
+           email: this.props.navigation.state.params.email,
+           lozinka: this.props.navigation.state.params.lozinka
+      }),
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        response.json().then(function(data) {
+          console.log(response.status + ' ' +data.error);
+          Toast.show(response.status + ' ' + data.error);
+        });
+      
+      }
+      else {
+        Toast.show('Kategorija je dodana');
+      } 
+      return response.json();
+    })
+    .then(data => this.setState({kategorije: data}))
+  
   }
 
   ukloniKategoriju=(kat) => {
-    fetch('http://192.168.2.104:8081/api/ukloniKategoriju/neko@nekoo.com/lozinka123/'+ kat)
+    fetch('http://192.168.2.104:8081/api/ukloniKategoriju/'+ kat, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           email: this.props.navigation.state.params.email,
+           lozinka: this.props.navigation.state.params.lozinka
+      }),
+    })
     .then(function(response) {
       if (!response.ok) {
         response.json().then(function(data) {
@@ -61,13 +117,12 @@ export default class PregledKategorije extends Component {
           Toast.show(response.status + ' ' + data.error);
         });
       }
-      else {
-        Toast.show(kat + ' je uklonjena');
+      else { 
+        Toast.show(kat + ' je uklonjena');  
       }  
-      this.update();
+      return response.json();
     })
-    
-    
+    .then(data => this.setState({kategorije: data}))
   }
   
   render() {

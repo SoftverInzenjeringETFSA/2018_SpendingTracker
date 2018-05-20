@@ -5,6 +5,7 @@ export class Home extends Component{
     constructor(props){
         
          super(props);
+    
          this.state = { currentValue: 230 };
        this.value=230;
        }
@@ -49,7 +50,7 @@ export class Home extends Component{
                 <View style={styles.buttonContainer}>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('PregledKategorija')} title="Pregled kategorija"/>
+                this.props.navigation.navigate('PregledKategorija',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Pregled kategorija"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>

@@ -16,7 +16,17 @@ export default class Login extends React.Component {
     //console.log('http://192.168.1.16:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     //192.168.1.5
     //192.168.0.18
-     return fetch('http://192.168.2.104:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
+     return fetch('http://192.168.2.104:8081/api/vratiKorisnika',  {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           email: this.state.email,
+           lozinka: this.state.password
+      }),
+    })
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson);

@@ -72,7 +72,7 @@ var korisnikSchema = new Schema(
             type: String,
             validate: {
               validator: function(value){
-                return /^([a-z][0-9]*){3,19}$/.test(value);
+                return /^([A-Za-z][0-9]*){3,19}$/.test(value);
               }
             }
           },  
@@ -106,10 +106,10 @@ app.use(bodyParser.json());
 
 //primjer api rute, vraca korisnika s poslanim imenom, prezimenom i lozinkom (u JSON formatu vraćeni podaci)
 //ruta je localhost:8081/api/vratiKorisnika/:ime/:prezime/:lozinka
-routerAPI.get('/vratiKorisnika/:email/:lozinka', function(req, res) {
+routerAPI.post('/vratiKorisnika', function(req, res) {
   //ovako uzimate parametre iz rute
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   
   //query
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
@@ -228,9 +228,9 @@ routerAPI.get('/vratiSveRacuneMjesec/:email/:lozinka/:mjesec', function(req, res
   });  
 });
 
-routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+routerAPI.post('/vratiKategorije', function(req, res) {
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   korisnik.findOne({'email': email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person.kategorije);
@@ -238,25 +238,23 @@ routerAPI.get('/vratiKategorije/:email/:lozinka', function(req, res) {
 });
 
 
-routerAPI.post('/dodajNovuKategoriju/:email/:lozinka', function(req, res) {
-  
+routerAPI.post('/dodajNovuKategoriju', function(req, res) {
   var nazivKategorije = req.body.naziv;
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
-  
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
    var opts = { runValidators: true, context: 'query', new: true };
 
   korisnik.findOneAndUpdate({'email': email, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
-    return res.send("succesfully saved");
+    return res.send(doc.kategorije);
   });
 });
 
 // route middleware za validaciju :kategorija
 routerAPI.param('kategorija', function(req, res, next, kategorija) {
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   //kategorija moze imati samo slova i brojeve (i _)
   if(!/^\w+$/.test(kategorija)) {
     res.status(400)       
@@ -269,17 +267,17 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
       
       res.statusMessage = 'Forbidden';
       res.status(403)       
-      .send('Forbidden');
+      .send({error: 'Forbidden'});
     }
     else if(!person.kategorije.find(kat => {return kat.naziv == kategorija})){
       res.statusMessage = 'Forbidden';
       res.status(403)       
-      .send('Forbidden');
+      .send({error: 'Forbidden'});
     }
     else if(person.kategorije.length == 1 && person.kategorije[0].naziv == kategorija){
       res.statusMessage = 'Forbidden';
       res.status(403)       
-      .send('Forbidden');
+      .send({error: 'Forbidden'});
     }
     else{
       req.kategorija = kategorija;
@@ -289,11 +287,10 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
 });
 
 
-routerAPI.get('/ukloniKategoriju/:email/:lozinka/:kategorija', function(req, res) {
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+routerAPI.post('/ukloniKategoriju/:kategorija', function(req, res) {
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   var kategorija = req.params.kategorija;
-
   korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
   function(err, doc){
     if (err) return res.send(500, { error: err });
