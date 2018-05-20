@@ -28,7 +28,7 @@ export default class IzborPrikazaStatistike extends React.Component {
             }
     }
     componentDidMount() {
-        fetch('http://192.168.1.2:8081/api/vratiSveRacuneMjesec/neko@nekoo.com/lozinka123/' + this.state.mjesec)
+        fetch('http://192.168.1.7:8081/api/vratiSveRacuneMjesec/neko@nekoo.com/lozinka123/' + this.state.mjesec)
         .then(response => response.json())
         .then((data) =>  {
             this.setState({historija: data});

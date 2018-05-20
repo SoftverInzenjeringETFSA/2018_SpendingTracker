@@ -7,21 +7,37 @@ export class  NewExpense extends Component{
   constructor(props){
    
     super(props);
-    this.state = { value: '', category:'',currentValue:'' };
+    this.state = { value: '', category:'',currentValue:'', limit:''};
 
   }
+
+  // DIO ZA OBAVJEST O LIMITU: BEGIN
+
   componentDidMount(){
-    //192.168.1.5
-  
-    fetch('http://192.168.1.53:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+    fetch('http://192.168.1.7:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+    .then(response => response.json())
+    .then(data => this.setState({limit: data.troskovniLimit}));
+    
+    fetch('http://192.168.1.7:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
     .then(response => response.json())
     .then(data => this.setState({currentValue: data.trenutniIznos}));
-    
   }
+
   inputExpense=()=>{
     //192.168.1.5
-    this.props.navigation.navigate('ObavjestOLimitu',{trosak:this.state.value});
-    fetch('http://192.168.1.53:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
+
+    // DIO ZA OBAVJEST O LIMITU: BEGIN
+
+    //Toast.show(this.state.limit.toString(),Toast.LONG);
+    if (this.state.value+this.state.currentValue>this.state.limit){
+      this.props.navigation.navigate('ObavjestOLimitu');
+    }
+    else{
+
+    // DIO ZA OBAVJEST O LIMITU: END
+
+    
+    fetch('http://192.168.1.7:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -33,7 +49,7 @@ export class  NewExpense extends Component{
       }),
       
     });
-    fetch('http://192.168.1.53:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.1.7:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,6 +62,7 @@ export class  NewExpense extends Component{
       
     });
     Toast.show("Uspješno ste dodali novi trošak");
+  }
   }
     render(){
         return (

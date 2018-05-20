@@ -15,7 +15,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.53:8081/api/vratiHistoriju/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.7:8081/api/vratiHistoriju/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({historija: data}))
   }
