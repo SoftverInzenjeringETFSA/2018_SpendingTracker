@@ -11,7 +11,7 @@ export class Home extends Component{
     componentDidMount(){
         //192.168.1.5
       
-        fetch('http://192.168.1.53:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+        fetch('http://192.168.2.104:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
         .then(response => response.json())
         .then((responseJson) => {
             console.log(responseJson.trenutniIznos);

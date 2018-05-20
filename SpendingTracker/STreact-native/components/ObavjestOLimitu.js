@@ -12,7 +12,7 @@ export default class ObavjestOLimitu extends Component{
     }
 
     componentDidMount(){
-        fetch('http://192.168.1.53:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+        fetch('http://192.168.2.104192.168.1.53:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
         .then(response => response.json())
         .then(data => this.setState( data, function(){
             

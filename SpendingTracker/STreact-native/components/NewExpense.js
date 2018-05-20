@@ -33,7 +33,7 @@ export class  NewExpense extends Component{
       }),
       
     });
-    fetch('http://192.168.1.53:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.2.104:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

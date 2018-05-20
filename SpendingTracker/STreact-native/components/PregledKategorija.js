@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, StyleSheet, Image, TextInput, Button } from 'react-native';
+import { Text, View, FlatList, StyleSheet, Image, TextInput, Button, ScrollView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 
 export default class PregledKategorije extends Component {
@@ -13,15 +13,15 @@ export default class PregledKategorije extends Component {
   }
 
   componentDidMount(){
-    //192.168.1.5
-    fetch('http://192.168.1.53:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    //192.168.1.53
+    fetch('http://192.168.2.104:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({kategorije: data}))
   }
 
   novaKategorija=() => {
     //192.168.1.5
-    fetch('http://192.168.1.53:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
+    fetch('http://192.168.2.104:8081/api/dodajNovuKategoriju/neko@nekoo.com/lozinka123', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -34,7 +34,10 @@ export default class PregledKategorije extends Component {
     Toast.show("Uspješno ste dodali novu kategoriju");
   }
   renderItem({ item, index }) {
-    return <Text style={styles.row}>{item.naziv}</Text>;
+    return <View style={styles.row}>
+      <Text style = {{padding: 10, textAlign: 'center'}} >{item.naziv}</Text>
+      <Button color="#343C47" style={styles.button} title="Ukloni kategoriju"/>
+      </View>;
   }
   render() {
     return (
@@ -55,15 +58,15 @@ export default class PregledKategorije extends Component {
                   onChangeText={(value) => this.setState({unos: value})}>
                 </TextInput>
                 <Button color="#343C47" style={styles.button} title="Unesi" onPress={this.novaKategorija}/>
-              </View>
-              
+              </View>     
         </View>
-        <View style={styles.buttonContainer}>
+        <ScrollView >
           <FlatList
+          
             data={this.state.kategorije}
             renderItem={this.renderItem}
           />
-        </View>
+        </ScrollView>
       </View>
           );
         }
@@ -110,7 +113,7 @@ export default class PregledKategorije extends Component {
         marginBottom:5
     },
         container: {
-          flex: 1,
+          
           width:200,
           backgroundColor: '#F0FFFF',
           alignItems: 'center',
@@ -124,4 +127,5 @@ export default class PregledKategorije extends Component {
           width:200
         }
       });
+
  
