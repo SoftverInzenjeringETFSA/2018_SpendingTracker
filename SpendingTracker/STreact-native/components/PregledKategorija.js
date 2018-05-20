@@ -14,10 +14,28 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.7:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
-    .then(response => response.json())
+    fetch('http://192.168.2.104:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    .then(function(response) {
+      if (!response.ok) {
+        response.json().then(function(data) {
+          console.log(response.status + ' ' +data.error);
+          Toast.show(response.status + ' ' + data.error);
+        });
+      
+      }
+      return response.json();
+    })
     .then(data => this.setState({kategorije: data}))
   }
+
+  update(){
+    fetch('http://192.168.2.104:8081/api/vratiKategorije/neko@nekoo.com/lozinka123')
+    .then(response => response.json())
+    .then(data => this.setState({kategorije: data}))
+    
+  }
+
+  
 
   novaKategorija=() => {
     //192.168.1.5
@@ -31,16 +49,25 @@ export default class PregledKategorije extends Component {
            naziv: this.state.unos
       }),
     });
-    Toast.show("Uspješno ste dodali novu kategoriju");
+    this.update();
   }
 
   ukloniKategoriju=(kat) => {
-    
     fetch('http://192.168.2.104:8081/api/ukloniKategoriju/neko@nekoo.com/lozinka123/'+ kat)
-    .then(response => response.json())
-
-    Toast.show(kat + " - kategorija uklonjena");
-    //.then(data => this.setState({kategorije: data}))
+    .then(function(response) {
+      if (!response.ok) {
+        response.json().then(function(data) {
+          console.log(response.status + ' ' +data.error);
+          Toast.show(response.status + ' ' + data.error);
+        });
+      }
+      else {
+        Toast.show(kat + ' je uklonjena');
+      }  
+      this.update();
+    })
+    
+    
   }
   
   render() {
@@ -66,7 +93,7 @@ export default class PregledKategorije extends Component {
         </View>
         <View >
           <FlatList
-
+            extraData={this.state}
             data={this.state.kategorije}
             renderItem={({item}) => <View style={styles.row}>
             <Text style = {{fontSize:15, padding: 10, textAlign: 'center', color: '#343C47'}} >{item.naziv}</Text>

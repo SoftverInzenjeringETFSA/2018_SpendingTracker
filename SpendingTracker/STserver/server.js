@@ -254,7 +254,7 @@ routerAPI.post('/dodajNovuKategoriju/:email/:lozinka', function(req, res) {
 });
 
 // route middleware za validaciju :kategorija
-/*routerAPI.param('kategorija', function(req, res, next, kategorija) {
+routerAPI.param('kategorija', function(req, res, next, kategorija) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   //kategorija moze imati samo slova i brojeve (i _)
@@ -266,22 +266,28 @@ routerAPI.post('/dodajNovuKategoriju/:email/:lozinka', function(req, res) {
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     if(person.kategorije.length == 0){
+      
+      res.statusMessage = 'Forbidden';
       res.status(403)       
       .send('Forbidden');
     }
     else if(!person.kategorije.find(kat => {return kat.naziv == kategorija})){
+      res.statusMessage = 'Forbidden';
       res.status(403)       
       .send('Forbidden');
     }
-    else if(person.kategorije.length == 1 && person.kategorije[0].naziv == req.kategorija){
+    else if(person.kategorije.length == 1 && person.kategorije[0].naziv == kategorija){
+      res.statusMessage = 'Forbidden';
       res.status(403)       
       .send('Forbidden');
     }
-
+    else{
+      req.kategorija = kategorija;
+      return next();
+    }  
   });
-  req.kategorija = kategorija;
 });
-*/
+
 
 routerAPI.get('/ukloniKategoriju/:email/:lozinka/:kategorija', function(req, res) {
   var email = req.params.email;
