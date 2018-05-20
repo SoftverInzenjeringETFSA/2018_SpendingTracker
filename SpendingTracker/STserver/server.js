@@ -119,9 +119,9 @@ routerAPI.post('/vratiKorisnika', function(req, res) {
 });
 
 
-routerAPI.get('/vratiHistoriju/:email/:lozinka', function(req, res) {
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+routerAPI.post('/vratiHistoriju', function(req, res) {
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
@@ -320,10 +320,10 @@ routerAPI.post('/dodajNoviTrosak/:email/:lozinka/:racun', function(req, res) {
   });
 });
 
-routerAPI.get('/trenutnoStanje/:email/:lozinka/:racun', function(req,res){
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
-  var racun = req.params.racun;
+routerAPI.post('/trenutnoStanje', function(req,res){
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
+  var racun = req.body.racun;
 
     korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
       if (err) return handleError(err);

@@ -6,7 +6,6 @@ export default class PregledKategorije extends Component {
 
   constructor(props){
     super(props);
-    console.log('kategorije ' +this.props.navigation.state.params.email + ' ' +this.props.navigation.state.params.lozinka);
     this.state ={
       kategorije: [],
       unos: ""
@@ -61,11 +60,8 @@ export default class PregledKategorije extends Component {
       }
       return response.json();
     })
-    .then(data => this.setState({kategorije: data}))
-  
+    .then(data => this.setState({kategorije: data}))  
   }
-
-  
 
   novaKategorija=() => {
     //192.168.1.5
@@ -95,7 +91,6 @@ export default class PregledKategorije extends Component {
       return response.json();
     })
     .then(data => this.setState({kategorije: data}))
-  
   }
 
   ukloniKategoriju=(kat) => {

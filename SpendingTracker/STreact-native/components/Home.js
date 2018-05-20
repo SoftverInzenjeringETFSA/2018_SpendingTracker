@@ -3,24 +3,32 @@ import {StyleSheet, Text, View, Button, TextInput, Image, ScrollView} from 'reac
 
 export class Home extends Component{
     constructor(props){
-        
-         super(props);
-    
-         this.state = { currentValue: 230 };
-       this.value=230;
+        super(props);
+        this.state = { currentValue: 230 };
+        this.value=230;
        }
     componentDidMount(){
         //192.168.1.5
       
-        fetch('http://192.168.2.104:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+        fetch('http://192.168.2.104:8081/api/trenutnoStanje',{
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+                 body: JSON.stringify({
+                 email: this.props.navigation.state.params.email,
+                 lozinka: this.props.navigation.state.params.lozinka,
+                 racun: "Racun1"
+            }),
+          })
         .then(response => response.json())
         .then((responseJson) => {
             console.log(responseJson.trenutniIznos);
             //this.value=responseJson.trenutniIznos.toString();
-            this.setState({currentValue: data.trenutniIznos})
+            this.setState({currentValue: responseJson.trenutniIznos})
             console.log(this.currentValue + "hi");
           })
-     
       }
     onPressButton= () =>{
         this.props.navigation.navigate('Login');
@@ -58,7 +66,7 @@ export class Home extends Component{
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('HistorijaTroskova')} title="Historija troskova"/>
+                this.props.navigation.navigate('HistorijaTroskova',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Historija troskova"/>
                 </View>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
