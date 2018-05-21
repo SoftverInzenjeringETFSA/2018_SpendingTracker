@@ -140,13 +140,11 @@ routerAPI.post('/vratiHistoriju', function(req, res) {
   });  
 });
 
-routerAPI.get('/vratiSveRacune/:email/:lozinka', function(req, res) {
+routerAPI.post('/vratiSveRacune', function(req, res) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
   
-  korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
-    if (err) return handleError(err);
-    var iznosi = [{
+  var iznosi = [{
       value: 0,
       label: "Nepoznato"
     }];
@@ -179,7 +177,6 @@ routerAPI.get('/vratiSveRacune/:email/:lozinka', function(req, res) {
       }
     }
     res.send(iznosi);
-  });  
 });
 
 routerAPI.get('/vratiSveRacuneMjesec/:email/:lozinka/:mjesec', function(req, res) {
@@ -352,6 +349,22 @@ routerAPI.post('/novoStanje/:email/:lozinka/:racun', function(req,res){
   });
 });
 
+routerAPI.post('/azurirajProfil/:email/:lozinka/:racun', function(req,res){
+  var noviIznos = req.body.noviIznos;
+
+  var email = req.params.email;
+  var lozinka = req.params.lozinka;
+  var racun = req.params.racun;
+
+  var opts = { runValidators: true, context: 'query', new: true };
+  
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
+  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts, 
+  function(err, person){
+    if (err) return res.send(500, { error: err });
+    return res.send("Umanjen iznos");
+  });
+});
 
 app.get('/', function (req, res) {
 

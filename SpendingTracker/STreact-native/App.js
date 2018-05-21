@@ -14,7 +14,8 @@ import unoskategorijzacija from './components/unoskategorizacija'
 import Login from './components/Login';
 import HistorijaTroskova from './components/HistorijaTroskova';
 import ObavjestOLimitu from './components/ObavjestOLimitu';
-import {Navigation, StackNavigator} from 'react-navigation';
+import AzuriranjeProfila from './components/AzuriranjeProfila';
+import {Navigation, StackNavigator} from 'react-navigation'
 
 const AppNavigator = StackNavigator({
     Login: {screen: Login},
@@ -30,8 +31,8 @@ const AppNavigator = StackNavigator({
     PregledKategorija: {screen: PregledKategorija},
     unoskategorijzacija: {screen: unoskategorijzacija},
     ObavjestOLimitu: {screen: ObavjestOLimitu},
-    HistorijaTroskova: {screen: HistorijaTroskova}
-    
+    HistorijaTroskova: {screen: HistorijaTroskova},
+    AzuriranjeProfila:{screen: AzuriranjeProfila}
   });
 export default class App extends React.Component {
   render() {

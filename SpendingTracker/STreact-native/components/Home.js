@@ -64,6 +64,12 @@ export class Home extends Component{
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('PregledStatistike')} title="Pregled statistike"/>
                 </View>
+
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('AzuriranjeProfila',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Azuriraj profil"/>
+                </View>
+
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('HistorijaTroskova',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Historija troskova"/>
