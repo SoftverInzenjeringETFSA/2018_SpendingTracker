@@ -352,22 +352,26 @@ routerAPI.post('/novoStanje/:racun', function(req,res){
   });
 });
 
-routerAPI.post('/azurirajProfil/:email/:lozinka/:racun', function(req,res){
-  var noviIznos = req.body.noviIznos;
-
+routerAPI.post('/AzurirajProfil/:email/:lozinka', function(req,res){
+  var password = req.body.password;
+  var mjesecniPrihodi = req.body.mjesecniPrihod;
+  var limit = req.body.limit;
+  var valuta = req.body.valuta;
+  var emailN = req.body.email;
+  
   var email = req.params.email;
   var lozinka = req.params.lozinka;
-  var racun = req.params.racun;
-
-  var opts = { runValidators: true, context: 'query', new: true };
   
-  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
-  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts, 
+  var opts = { runValidators: true, context: 'query', new: true };
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka},
+  {$set:{'lozinka': lozinka,'troskovniLimit':limit,'mjesecniPrihod':mjesecniPrihodi, 'valuta': valuta, 'email': emailN}}, opts, 
   function(err, person){
-    if (err) return res.send(500, { error: err });
-    return res.send("Umanjen iznos");
+  if (err) {
+   return handleError(error);
+  }
+  res.send({poruka:"Bravo"});
   });
-});
+  });
 
 app.get('/', function (req, res) {
 
