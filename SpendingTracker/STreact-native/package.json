@@ -20,14 +20,19 @@
   },
   "dependencies": {
     "@shoutem/ui": "^0.23.4",
+    "add": "^2.0.6",
     "expo": "^27.0.1",
+    "or": "^0.2.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-datepicker": "^1.7.2",
     "react-native-fontawesome": "^5.7.0",
+    "react-native-modal-datetime-picker": "^5.1.0",
     "react-native-simple-toast": "0.0.8",
     "react-native-svg": "^6.3.1",
     "react-native-svg-charts": "^5.0.0",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^1.5.12"
+    "react-navigation": "^1.5.12",
+    "yarn": "^1.6.0"
   }
 }

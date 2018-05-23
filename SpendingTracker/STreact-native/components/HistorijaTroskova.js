@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Button, TextInput, Image, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput, Image, FlatList,TouchableOpacity} from 'react-native';
 //import { ScrollView } from '../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 //import { ListView } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 //import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 
+import DateTimePicker from 'react-native-modal-datetime-picker';
+//npm install --save react-native-modal-datetime-picker or yarn add react-native-modal-datetime-picker
 export default class HistorijaTroskova extends React.Component {
+
+  state = {
+    isDateTimePickerVisible: false,
+  };
 
   constructor(props){
     super(props);
@@ -16,7 +22,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.2.104:8081/api/vratiHistoriju',{
+    fetch('http://192.168.1.5:8081/api/vratiHistoriju',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -24,7 +30,10 @@ export default class HistorijaTroskova extends React.Component {
       },
            body: JSON.stringify({
            email: this.props.navigation.state.params.email,
-           lozinka: this.props.navigation.state.params.lozinka
+           lozinka: this.props.navigation.state.params.lozinka,
+           kategorije: this.props.navigation.state.params.kategorije,
+           datum1: this.state.datum1,
+           datum2:this.state.datum2 
       }),
     })
     .then(response => response.json())
@@ -34,16 +43,48 @@ export default class HistorijaTroskova extends React.Component {
   //renderItem({ item, index }) {
   //  return <Text style={styles.row}>{item.iznos}</Text>;
   //}
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  pokreni_upit = () => this.setState({  });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDatePicked = (date) => {
+    this.state.datum1=date;
+    this._hideDateTimePicker();
+  };
+
+  _handleDatePicked2 = (date) => {
+    this.state.datum2=date;
+    this._hideDateTimePicker();
+  };
 
     render() {
+      
       return (
+
         <View>
           <View style={styles.imagecontainer}>
             </View>
+            
+            <Button color="#343C47" style={styles.button} title="OD" onPress={this._showDateTimePicker}/>
+            <Button color="#343C47" style={styles.button} title="DO" onPress={this._showDateTimePicker}/>
+            <Button color="#343C47" style={styles.button} title="POTVRDI" onPress={this.pokreni_upit}/>
+            
+            <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this._handleDatePicked}
+          onCancel={this._hideDateTimePicker}
+        />
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this._handleDatePicked2}
+          onCancel={this._hideDateTimePicker}
+        />
             <View style={styles.buttonContainer}>
                 <FlatList
                 data={this.state.historija}
-                renderItem={({item}) => <Text style={styles.row} >Iznos: {item.iznos}, datum unosa:  {item.datum}</Text>}
+                renderItem={({item}) => <Text style={styles.row} >Iznos: {item.iznos} \n datum unosa:  {item.datum} \n</Text>}
                 >
 
                     </FlatList>
@@ -52,7 +93,7 @@ export default class HistorijaTroskova extends React.Component {
       );
     }
   }
-  
+  //Kategorija: {item.kategorija.naziv}
   const dugmad = StyleSheet.create({
     container:{
       backgroundColor: "rgba(92, 99,216, 1)",

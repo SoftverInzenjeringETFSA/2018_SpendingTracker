@@ -14,11 +14,11 @@ export class  NewExpense extends Component{
   // DIO ZA OBAVJEST O LIMITU: BEGIN
 
   componentDidMount(){
-    fetch('http://192.168.1.7:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.5:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
     .then(response => response.json())
     .then(data => this.setState({limit: data.troskovniLimit}));
     
-    fetch('http://192.168.1.7:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+    fetch('http://192.168.1.5:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
     .then(response => response.json())
     .then(data => this.setState({currentValue: data.trenutniIznos}));
   }
@@ -37,7 +37,7 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
     
-    fetch('http://192.168.1.7:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.1.5:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -49,7 +49,7 @@ export class  NewExpense extends Component{
       }),
       
     });
-    fetch('http://192.168.1.7:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.1.5:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

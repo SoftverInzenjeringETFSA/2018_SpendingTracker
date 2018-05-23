@@ -123,6 +123,7 @@ routerAPI.post('/vratiHistoriju', function(req, res) {
   var email = req.body.email;
   var lozinka = req.body.lozinka;
   
+  
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     var datumi_iznosi = [];
@@ -130,9 +131,10 @@ routerAPI.post('/vratiHistoriju', function(req, res) {
     if (person!=null)
     for(i=0; i<person.racuni.length; i++) {
       for(j=0; j<person.racuni[i].troskovi.length; j++) {
-        datumi_iznosi[brojac] = {kategorija: person.racuni[i].troskovi[j].kategorija.naziv,
-                                iznos:person.racuni[i].troskovi[j].iznos,
-                                datum:person.racuni[i].troskovi[j].datum}
+        if (person.racuni[i].troskovi[j].kategorija != null)
+          datumi_iznosi[brojac] = {kategorija: person.racuni[i].troskovi[j].kategorija.naziv,
+                                  iznos:person.racuni[i].troskovi[j].iznos,
+                                  datum:person.racuni[i].troskovi[j].datum}
         brojac++;
       }
     }

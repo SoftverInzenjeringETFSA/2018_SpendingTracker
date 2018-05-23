@@ -10,7 +10,7 @@ export class Home extends Component{
     componentDidMount(){
         //192.168.1.5
       
-        fetch('http://192.168.2.104:8081/api/trenutnoStanje',{
+        fetch('http://192.168.1.5:8081/api/trenutnoStanje',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
