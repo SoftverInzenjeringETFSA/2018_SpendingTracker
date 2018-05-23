@@ -7,18 +7,41 @@ export class  NewExpense extends Component{
   constructor(props){
    
     super(props);
-    this.state = { value: '', category:'',currentValue:'', limit:''};
+    this.state = { value: '', category:'',currentValue:'', limit:'', kategorije: []};
 
   }
 
   // DIO ZA OBAVJEST O LIMITU: BEGIN
-
+  //this.props.navigation.state.params.email
   componentDidMount(){
-    fetch('http://192.168.1.5:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.2.104:8081/api/vratiKorisnika', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+            email: this.props.navigation.state.params.email,
+            lozinka: this.props.navigation.state.params.lozinka
+      }),
+      
+    })
     .then(response => response.json())
-    .then(data => this.setState({limit: data.troskovniLimit}));
+    .then(data => this.setState({limit: data.troskovniLimit, kategorije: data.kategorije}));
     
-    fetch('http://192.168.1.5:8081/api/trenutnoStanje/neko@nekoo.com/lozinka123/Racun1')
+    fetch('http://192.168.2.104:8081/api/trenutnoStanje',{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+            email: this.props.navigation.state.params.email,
+            lozinka: this.props.navigation.state.params.lozinka,
+            racun: "Racun1"
+      }),
+      
+    })
     .then(response => response.json())
     .then(data => this.setState({currentValue: data.trenutniIznos}));
   }
@@ -37,26 +60,30 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
     
-    fetch('http://192.168.1.5:8081/api/dodajNoviTrosak/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.2.104:8081/api/dodajNoviTrosak/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
            body: JSON.stringify({
-           kategorije: this.state.category,
+            email: this.props.navigation.state.params.email,
+            lozinka: this.props.navigation.state.params.lozinka,
+           kategorija: this.state.category,
            iznos: this.state.value
       }),
       
     });
-    fetch('http://192.168.1.5:8081/api/novoStanje/neko@nekoo.com/lozinka123/Racun1', {
+    fetch('http://192.168.2.104:8081/api/novoStanje/Racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
            body: JSON.stringify({
-           noviIznos: (+this.state.currentValue) - (+this.state.value),
+            email: this.props.navigation.state.params.email,
+            lozinka: this.props.navigation.state.params.lozinka,
+           noviIznos: (+this.state.currentValue) - (+this.state.value)
           
       }),
       
@@ -85,12 +112,14 @@ export class  NewExpense extends Component{
                     selectedValue={this.state.category}
                     onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}
                     style={{ height: 50, width: 200,color:"#343C47" }}>
-                    <Picker.Item label="Odjeca" value="Odjeca" />
+                    {/*<Picker.Item label="Odjeca" value="Odjeca" />
                     <Picker.Item label="Namirnice" value="Namirnice" />
                     <Picker.Item label="Zabava" value="Zabava" />
                     <Picker.Item label="Pokloni" value="Pokloni" />
-                    <Picker.Item label="Kućanstvo" value="Kućanstvo" />
-                   
+        <Picker.Item label="Kućanstvo" value="Kućanstvo" />*/}
+                    {this.state.kategorije.map((item)=>(
+                    <Picker.Item label={item.naziv} value={item.naziv} key={item.id} />)
+                    )}
                   </Picker></View>
             </View>
             <View style={styles.buttonContainer}>

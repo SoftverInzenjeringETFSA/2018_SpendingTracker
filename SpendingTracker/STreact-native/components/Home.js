@@ -10,7 +10,7 @@ export class Home extends Component{
     componentDidMount(){
         //192.168.1.5
       
-        fetch('http://192.168.1.5:8081/api/trenutnoStanje',{
+        fetch('http://192.168.2.104:8081/api/trenutnoStanje',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -50,7 +50,7 @@ export class Home extends Component{
                 </View>  
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('NewExpense')} title="Unesi trošak"/>   
+                this.props.navigation.navigate('NewExpense',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi trošak"/>   
                 </View>  
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  title="Unesi prihod"/>   

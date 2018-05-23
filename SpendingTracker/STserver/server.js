@@ -84,13 +84,14 @@ var korisnikSchema = new Schema(
               {
                 naziv: {
                   type: String,
-                  validate: {
+                  required: true,
+                  /*validate: {
                     validator: function(value){ //provjera da li postoji kategorija definisana ranije od tog korisnika
                       if(this.parent().kategorije.findIndex(kat => {return kat.naziv == value})==-1)
                         return false;
                       return true;
                     }
-                  }
+                  }*/
                 },  
               }
             }
@@ -297,10 +298,10 @@ routerAPI.post('/ukloniKategoriju/:kategorija', function(req, res) {
   });
 });
 
-routerAPI.post('/dodajNoviTrosak/:email/:lozinka/:racun', function(req, res) {
+routerAPI.post('/dodajNoviTrosak/:racun', function(req, res) {
   var iznos = req.body.iznos;
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   var racun = req.params.racun;
   var kategorija = req.body.kategorija;
   var danas = new Date();
@@ -334,11 +335,11 @@ routerAPI.post('/trenutnoStanje', function(req,res){
 
 
 
-routerAPI.post('/novoStanje/:email/:lozinka/:racun', function(req,res){
+routerAPI.post('/novoStanje/:racun', function(req,res){
   var noviIznos = req.body.noviIznos;
 
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   var racun = req.params.racun;
 
   var opts = { runValidators: true, context: 'query', new: true };
