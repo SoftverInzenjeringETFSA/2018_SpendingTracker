@@ -15,7 +15,17 @@ export default class PregledStatistike extends React.Component {
   }
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.7:8081/api/vratiSveRacune/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.7:8081/api/vratiSveRacune', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+             body: JSON.stringify({
+             email: this.props.navigation.state.params.email,
+             lozinka: this.props.navigation.state.params.lozinka
+        }),
+      })
     .then(response => response.json())
     .then((data) =>  {
         this.setState({historija: data});

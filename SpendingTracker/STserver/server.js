@@ -182,9 +182,9 @@ routerAPI.post('/vratiSveRacune', function(req, res) {
     res.send(iznosi);
 });
 
-routerAPI.get('/vratiSveRacuneMjesec/:email/:lozinka/:mjesec', function(req, res) {
-  var email = req.params.email;
-  var lozinka = req.params.lozinka;
+routerAPI.post('/vratiSveRacuneMjesec/:mjesec', function(req, res) {
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
   var mjesec = req.params.mjesec.toString();
 
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {

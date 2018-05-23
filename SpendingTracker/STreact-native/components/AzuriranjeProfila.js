@@ -11,7 +11,17 @@ export class  AzuriranjeProfila extends Component{
   }
 
   componentDidMount(){
-    fetch('http://192.168.1.5:8081/api/vratiKorisnika/neko@nekoo.com/lozinka123')
+    fetch('http://192.168.1.5:8081/api/vratiKorisnika', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+           body: JSON.stringify({
+           email: this.props.navigation.state.params.email,
+           lozinka: this.props.navigation.state.params.lozinka
+      }),
+    })
     .then(response => response.json())
     .then(data => this.setState({limit: data.troskovniLimit}));
   }
