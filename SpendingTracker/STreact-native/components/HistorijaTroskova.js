@@ -22,7 +22,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/vratiHistoriju',{
+    fetch('http://192.168.1.11:8081/api/vratiHistoriju',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -9,8 +9,8 @@ export class Home extends Component{
        }
     componentDidMount(){
         //192.168.1.5
-      
-        fetch('http://192.168.2.104:8081/api/trenutnoStanje',{
+
+        fetch('http://192.168.1.11:8081/api/trenutnoStanje',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -19,7 +19,7 @@ export class Home extends Component{
                  body: JSON.stringify({
                  email: this.props.navigation.state.params.email,
                  lozinka: this.props.navigation.state.params.lozinka,
-                 racun: "Racun1"
+                 racun: "racun1"
             }),
           })
         .then(response => response.json())
@@ -47,13 +47,14 @@ export class Home extends Component{
                 <View style={styles.costcontainer}>
                 <Text style={styles.accountText}>{this.state.currentValue}  KM</Text>
                 </View>
-                </View>  
+                </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('NewExpense',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi trošak"/>   
-                </View>  
+                this.props.navigation.navigate('NewExpense',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi trošak"/>
+                </View>
                 <View style={styles.buttonContainer}>
-                <Button color="#343C47" style={styles.button}  title="Unesi prihod"/>   
+                <Button color="#343C47" style={styles.button} onPress={()=>
+                this.props.navigation.navigate('NewPrihod',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi prihod"/>   
                     </View>
                 <View style={styles.buttonContainer}>
                 <View style={styles.buttonContainer}>
@@ -76,7 +77,7 @@ export class Home extends Component{
                 </View>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
-                
+
                 </View>
             </ScrollView >
         );
@@ -90,10 +91,10 @@ const styles = StyleSheet.create({
         marginBottom:8
     },
     contentcontainer:{
-     
+
       alignItems: 'flex-start',
       padding: 20,
-      
+
     },
     button:{
         backgroundColor:'#343C47',
@@ -134,4 +135,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Home; 
+export default Home;

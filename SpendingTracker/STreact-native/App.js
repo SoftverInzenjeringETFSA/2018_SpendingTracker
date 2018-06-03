@@ -15,6 +15,7 @@ import Login from './components/Login';
 import HistorijaTroskova from './components/HistorijaTroskova';
 import ObavjestOLimitu from './components/ObavjestOLimitu';
 import AzuriranjeProfila from './components/AzuriranjeProfila';
+import NewPrihod from './components/NewPrihod';
 import {Navigation, StackNavigator} from 'react-navigation'
 
 const AppNavigator = StackNavigator({
@@ -22,6 +23,7 @@ const AppNavigator = StackNavigator({
     Home: {screen: Home},
     DevelopersHelp: {screen: DevelopersHelp},
     NewExpense: {screen: NewExpense},
+    NewPrihod:{screen: NewPrihod},
     PregledStatistike: {screen: PregledStatistike},
     IzborPrikazaStatistike: {screen: IzborPrikazaStatistike},
     IzborMjeseca: {screen: IzborMjeseca},
@@ -36,7 +38,7 @@ const AppNavigator = StackNavigator({
   });
 export default class App extends React.Component {
   render() {
-    return ( 
+    return (
       <AppNavigator/>
     );
   }

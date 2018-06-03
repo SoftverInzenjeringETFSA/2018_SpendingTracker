@@ -14,7 +14,7 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/vratiKategorije', {
+    fetch('http://192.168.1.11:8081/api/vratiKategorije', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -39,7 +39,7 @@ export default class PregledKategorije extends Component {
   }
 
   update(){
-    fetch('http://192.168.1.5:8081/api/vratiKategorije', {
+    fetch('http://192.168.1.11:8081/api/vratiKategorije', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -65,7 +65,7 @@ export default class PregledKategorije extends Component {
 
   novaKategorija=() => {
     //192.168.1.5
-    fetch('http://192.168.1.5:8081/api/dodajNovuKategoriju', {
+    fetch('http://192.168.1.11:8081/api/dodajNovuKategoriju', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -94,7 +94,7 @@ export default class PregledKategorije extends Component {
   }
 
   ukloniKategoriju=(kat) => {
-    fetch('http://192.168.1.5:8081/api/ukloniKategoriju/'+ kat, {
+    fetch('http://192.168.1.11:8081/api/ukloniKategoriju/'+ kat, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

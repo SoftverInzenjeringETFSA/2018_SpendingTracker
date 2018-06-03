@@ -60,20 +60,6 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
 
-    fetch('http://192.168.1.11:8081/api/dodajNoviTrosak/racun1', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-           body: JSON.stringify({
-            email: this.props.navigation.state.params.email,
-            lozinka: this.props.navigation.state.params.lozinka,
-           kategorija: this.state.category,
-           iznos: this.state.value
-      }),
-
-    });
     fetch('http://192.168.1.11:8081/api/dodajNoviPrihod/racun1', {
       method: 'POST',
       headers: {
@@ -87,7 +73,8 @@ export class  NewExpense extends Component{
       }),
 
     });
-    fetch('http://192.168.1.11:8081/api/novoStanje/racun1', {
+
+    fetch('http://192.168.1.11:8081/api/novoStanje2/racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -96,12 +83,12 @@ export class  NewExpense extends Component{
            body: JSON.stringify({
             email: this.props.navigation.state.params.email,
             lozinka: this.props.navigation.state.params.lozinka,
-           noviIznos: (+this.state.currentValue) - (+this.state.value)
+           noviIznos: (+this.state.currentValue) + (+this.state.value)
 
       }),
 
     });
-    Toast.show("Uspješno ste dodali novi trošak");
+    Toast.show("Uspješno ste dodali novi prihod");
   }
   }
     render(){
@@ -112,7 +99,7 @@ export class  NewExpense extends Component{
                   style={{width: 200, height: 100}}
                   source={require('../img/money.png')}
                     />
-                    <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Novi trošak</Text>
+                    <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Novi prihod</Text>
                    </View>
                    <View style={styles.contentcontainer}>
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
@@ -121,19 +108,7 @@ export class  NewExpense extends Component{
                       style={styles.input}
                       onChangeText={(value) => this.setState({value})}></TextInput></View>
                     <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                    <Picker
-                    selectedValue={this.state.category}
-                    onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}
-                    style={{ height: 50, width: 200,color:"#343C47" }}>
-                    {/*<Picker.Item label="Odjeca" value="Odjeca" />
-                    <Picker.Item label="Namirnice" value="Namirnice" />
-                    <Picker.Item label="Zabava" value="Zabava" />
-                    <Picker.Item label="Pokloni" value="Pokloni" />
-        <Picker.Item label="Kućanstvo" value="Kućanstvo" />*/}
-                    {this.state.kategorije.map((item)=>(
-                    <Picker.Item label={item.naziv} value={item.naziv} key={item.id} />)
-                    )}
-                  </Picker></View>
+                    </View>
             </View>
             <View style={styles.buttonContainer}>
                    <Button color="#343C47" style={styles.button} title="Unesi" onPress={this.inputExpense}/>

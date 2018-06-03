@@ -18,8 +18,8 @@ var korisnikSchema = new Schema(
           },
           message: 'Ime mora počinjati velikim slovom i ne može sadržavati specijalne karaktere!'
         },
-        required: [true, 'Obavezno je unijeti ime!']  
-      }, 
+        required: [true, 'Obavezno je unijeti ime!']
+      },
       prezime: {
         type: String,
         validate: {
@@ -28,8 +28,8 @@ var korisnikSchema = new Schema(
           },
           message: 'Prezime mora počinjati velikim slovom i ne može sadržavati specijalne karaktere!'
         },
-        required: [true, 'Obavezno je unijeti prezime!'] 
-      }, 
+        required: [true, 'Obavezno je unijeti prezime!']
+      },
       lozinka: {
         type: String,
         validate: {
@@ -38,8 +38,8 @@ var korisnikSchema = new Schema(
           },
           message: 'Lozinka mora sadržavati bar 7 karaktera, od kojih bar jedno veliko slovo, bar jedno malo slovo i bar jednu cifru!'
         },
-        required: [true, 'Obavezno je unijeti lozinku!'] 
-      }, 
+        required: [true, 'Obavezno je unijeti lozinku!']
+      },
       mjesecniPrihod: Number,
       troskovniLimit: Number,
       valuta: String,
@@ -51,11 +51,11 @@ var korisnikSchema = new Schema(
           },
           message: 'Unesite validnu email adresu!'
         },
-        required: [true, 'Obavezno je unijeti lozinku!'] 
-        
-      }, 
+        required: [true, 'Obavezno je unijeti lozinku!']
+
+      },
       kategorije: [
-        { 
+        {
           naziv: {
             type: String,
             validate: {
@@ -63,11 +63,11 @@ var korisnikSchema = new Schema(
                 return /^([a-z][0-9]*){3,19}$/.test(value);
               }
             }
-          },  
+          },
         }
       ],
       racuni: [
-        { 
+        {
           naziv: {
             type: String,
             validate: {
@@ -75,12 +75,12 @@ var korisnikSchema = new Schema(
                 return /^([A-Za-z][0-9]*){3,19}$/.test(value);
               }
             }
-          },  
+          },
           trenutniIznos: Number,
           troskovi: [
             { iznos: Number,
               datum: Date,
-              kategorija: 
+              kategorija:
               {
                 naziv: {
                   type: String,
@@ -92,9 +92,13 @@ var korisnikSchema = new Schema(
                       return true;
                     }
                   }*/
-                },  
+                },
               }
             }
+          ],
+          prihodi: [
+            {iznos: Number,
+            datum: Date}
           ]
         }
       ]
@@ -111,20 +115,20 @@ routerAPI.post('/vratiKorisnika', function(req, res) {
   //ovako uzimate parametre iz rute
   var email = req.body.email;
   var lozinka = req.body.lozinka;
-  
+
   //query
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person);
-  });  
+  });
 });
 
 
 routerAPI.post('/vratiHistoriju', function(req, res) {
   var email = req.body.email;
   var lozinka = req.body.lozinka;
-  
-  
+
+
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     var datumi_iznosi = [];
@@ -140,13 +144,13 @@ routerAPI.post('/vratiHistoriju', function(req, res) {
       }
     }
     res.send(datumi_iznosi);
-  });  
+  });
 });
 
 routerAPI.post('/vratiSveRacune', function(req, res) {
   var email = req.params.email;
   var lozinka = req.params.lozinka;
-  
+
   var iznosi = [{
       value: 0,
       label: "Nepoznato"
@@ -225,7 +229,7 @@ routerAPI.post('/vratiSveRacuneMjesec/:mjesec', function(req, res) {
       }
     }
     res.send(iznosi);
-  });  
+  });
 });
 
 routerAPI.post('/vratiKategorije', function(req, res) {
@@ -234,7 +238,7 @@ routerAPI.post('/vratiKategorije', function(req, res) {
   korisnik.findOne({'email': email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     res.send(person.kategorije);
-  });  
+  });
 });
 
 
@@ -244,7 +248,7 @@ routerAPI.post('/dodajNovuKategoriju', function(req, res) {
   var lozinka = req.body.lozinka;
    var opts = { runValidators: true, context: 'query', new: true };
 
-  korisnik.findOneAndUpdate({'email': email, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts, 
+  korisnik.findOneAndUpdate({'email': email, 'lozinka': lozinka}, {$push:{'kategorije': {'naziv': nazivKategorije}}}, opts,
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send(doc.kategorije);
@@ -257,32 +261,32 @@ routerAPI.param('kategorija', function(req, res, next, kategorija) {
   var lozinka = req.body.lozinka;
   //kategorija moze imati samo slova i brojeve (i _)
   if(!/^\w+$/.test(kategorija)) {
-    res.status(400)       
+    res.status(400)
    .send('Bad request');
   }
   //provjere
   korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
     if (err) return handleError(err);
     if(person.kategorije.length == 0){
-      
+
       res.statusMessage = 'Forbidden';
-      res.status(403)       
+      res.status(403)
       .send({error: 'Forbidden'});
     }
     else if(!person.kategorije.find(kat => {return kat.naziv == kategorija})){
       res.statusMessage = 'Forbidden';
-      res.status(403)       
+      res.status(403)
       .send({error: 'Forbidden'});
     }
     else if(person.kategorije.length == 1 && person.kategorije[0].naziv == kategorija){
       res.statusMessage = 'Forbidden';
-      res.status(403)       
+      res.status(403)
       .send({error: 'Forbidden'});
     }
     else{
       req.kategorija = kategorija;
       return next();
-    }  
+    }
   });
 });
 
@@ -291,7 +295,7 @@ routerAPI.post('/ukloniKategoriju/:kategorija', function(req, res) {
   var email = req.body.email;
   var lozinka = req.body.lozinka;
   var kategorija = req.params.kategorija;
-  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true}, 
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka}, {$pull:{'kategorije': {'naziv': kategorija}}}, {new: true},
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send(doc.kategorije);
@@ -308,15 +312,36 @@ routerAPI.post('/dodajNoviTrosak/:racun', function(req, res) {
 
   var opts = { runValidators: true, context: 'query', new: true };
 
-  /*kompleksniji query ako nekom bude trebalo za rutu, traži se korisnik s 
+  /*kompleksniji query ako nekom bude trebalo za rutu, traži se korisnik s
   imenom, prezimenom i lozinkom koji su poslani kao parametri u GET metodi, onda se odabire racun koji ima naziv
-  kao sto je poslan parametar ('racuni.naziv': racun) zatim se push-a novi objekat na listu racuna koji je 
+  kao sto je poslan parametar ('racuni.naziv': racun) zatim se push-a novi objekat na listu racuna koji je
   odabran(za to sluzi ovaj operator $ da bi se odabrao taj nadjeni racun iz prethodnog koraka)*/
   korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
-  {$push:{'racuni.$.troskovi': {'iznos': iznos, 'datum': danas, 'kategorija': {'naziv': kategorija}}}}, opts, 
+  {$push:{'racuni.$.troskovi': {'iznos': iznos, 'datum': danas, 'kategorija': {'naziv': kategorija}}}}, opts,
   function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send("Dodan novi trošak");
+  });
+});
+
+routerAPI.post('/dodajNoviPrihod/:racun', function(req, res) {
+  var iznos = req.body.iznos;
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
+  var racun = req.params.racun;
+  var danas = new Date();
+
+  var opts = { runValidators: true, context: 'query', new: true };
+
+  /*kompleksniji query ako nekom bude trebalo za rutu, traži se korisnik s
+  imenom, prezimenom i lozinkom koji su poslani kao parametri u GET metodi, onda se odabire racun koji ima naziv
+  kao sto je poslan parametar ('racuni.naziv': racun) zatim se push-a novi objekat na listu racuna koji je
+  odabran(za to sluzi ovaj operator $ da bi se odabrao taj nadjeni racun iz prethodnog koraka)*/
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
+  {$push:{'racuni.$.prihodi': {'iznos': iznos, 'datum': danas}}}, opts,
+  function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("Dodan novi prihod");
   });
 });
 
@@ -329,7 +354,7 @@ routerAPI.post('/trenutnoStanje', function(req,res){
       if (err) return handleError(err);
       var tajRacun = person.racuni.find(rac => {return rac.naziv == racun});
      return res.send({'trenutniIznos': tajRacun.trenutniIznos});
-    });  
+    });
 
 });
 
@@ -343,12 +368,28 @@ routerAPI.post('/novoStanje/:racun', function(req,res){
   var racun = req.params.racun;
 
   var opts = { runValidators: true, context: 'query', new: true };
-  
+
   korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
-  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts, 
+  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts,
   function(err, person){
     if (err) return res.send(500, { error: err });
     return res.send("Umanjen iznos");
+  });
+});
+routerAPI.post('/novoStanje2/:racun', function(req,res){
+  var noviIznos = req.body.noviIznos;
+
+  var email = req.body.email;
+  var lozinka = req.body.lozinka;
+  var racun = req.params.racun;
+
+  var opts = { runValidators: true, context: 'query', new: true };
+
+  korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka, 'racuni.naziv': racun},
+  {$set:{'racuni.$.trenutniIznos': noviIznos}}, opts,
+  function(err, person){
+    if (err) return res.send(500, { error: err });
+    return res.send("Uvecan iznos");
   });
 });
 
@@ -358,13 +399,13 @@ routerAPI.post('/AzurirajProfil/:email/:lozinka', function(req,res){
   var limit = req.body.limit;
   var valuta = req.body.valuta;
   var emailN = req.body.email;
-  
+
   var email = req.params.email;
   var lozinka = req.params.lozinka;
-  
+
   var opts = { runValidators: true, context: 'query', new: true };
   korisnik.findOneAndUpdate({'email':email, 'lozinka': lozinka},
-  {$set:{'lozinka': lozinka,'troskovniLimit':limit,'mjesecniPrihod':mjesecniPrihodi, 'valuta': valuta, 'email': emailN}}, opts, 
+  {$set:{'lozinka': lozinka,'troskovniLimit':limit,'mjesecniPrihod':mjesecniPrihodi, 'valuta': valuta, 'email': emailN}}, opts,
   function(err, person){
   if (err) {
    return handleError(error);
@@ -381,7 +422,7 @@ app.get('/', function (req, res) {
         console.log(person);
         res.send(person);
       });
-  
+
 
 })
 
@@ -390,5 +431,5 @@ app.use('/api', routerAPI);
 var server = app.listen(8081, function () {
    var host = server.address().address
    var port = server.address().port
-   
+
 })

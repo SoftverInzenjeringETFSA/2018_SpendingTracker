@@ -28,7 +28,7 @@ export default class IzborPrikazaStatistike extends React.Component {
             }
     }
     componentDidMount() {
-        fetch('http://192.168.1.5:8081/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
+        fetch('http://192.168.1.11:8081/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
             method: 'POST',
             headers: {
               Accept: 'application/json',

@@ -15,7 +15,7 @@ export default class PregledStatistike extends React.Component {
   }
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.7:8081/api/vratiSveRacune', {
+    fetch('http://192.168.1.11:8081/api/vratiSveRacune', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

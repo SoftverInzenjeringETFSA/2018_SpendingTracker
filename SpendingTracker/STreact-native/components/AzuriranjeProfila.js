@@ -9,7 +9,7 @@ export class AzuriranjeProfila extends Component{
 }
 
 componentDidMount(){
-  fetch('http://192.168.1.2:8081/api/vratiKorisnika', {
+  fetch('http://192.168.1.11:8081/api/vratiKorisnika', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -29,7 +29,7 @@ saveChanges=()=>{
   if(this.state.password !== this.state.passwordPonovi) {
     Toast.show("Unesite ponovo lozinku");
   } else {
-  fetch('http://192.168.1.2:8081/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
+  fetch('http://192.168.1.11:8081/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
     method: 'POST',
     headers: {
     Accept: 'application/json',
