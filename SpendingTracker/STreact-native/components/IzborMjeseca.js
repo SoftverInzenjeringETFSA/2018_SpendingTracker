@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image, Picker} from 'react-native';
-
+import ipConfig from '../config.json';
 export default class IzborPrikazaStatistike extends React.Component {
     constructor(props){
         super(props);
@@ -28,7 +28,7 @@ export default class IzborPrikazaStatistike extends React.Component {
             }
     }
     componentDidMount() {
-        fetch('http://192.168.1.11:8081/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
+        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
             method: 'POST',
             headers: {
               Accept: 'application/json',

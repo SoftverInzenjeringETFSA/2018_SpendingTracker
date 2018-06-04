@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
 import Toast from 'react-native-simple-toast';
-
+import ipConfig from '../config.json';
 export class  NewExpense extends Component{
   constructor(props){
 
@@ -14,7 +14,7 @@ export class  NewExpense extends Component{
   // DIO ZA OBAVJEST O LIMITU: BEGIN
   //this.props.navigation.state.params.email
   componentDidMount(){
-    fetch('http://192.168.1.11:8081/api/vratiKorisnika', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKorisnika', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -29,7 +29,7 @@ export class  NewExpense extends Component{
     .then(response => response.json())
     .then(data => this.setState({limit: data.troskovniLimit, kategorije: data.kategorije}));
 
-    fetch('http://192.168.1.11:8081/api/trenutnoStanje',{
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/trenutnoStanje',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -60,7 +60,7 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
 
-    fetch('http://192.168.1.11:8081/api/dodajNoviTrosak/racun1', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviTrosak/racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -74,7 +74,7 @@ export class  NewExpense extends Component{
       }),
 
     });
-    fetch('http://192.168.1.11:8081/api/dodajNoviPrihod/racun1', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -87,7 +87,7 @@ export class  NewExpense extends Component{
       }),
 
     });
-    fetch('http://192.168.1.11:8081/api/novoStanje/racun1', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/novoStanje/racun1', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

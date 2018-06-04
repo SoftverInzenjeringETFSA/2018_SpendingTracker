@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
-
+import ipConfig from '../config.json';
 export default class PregledStatistike extends React.Component {
   constructor(props){
     super(props);
@@ -15,7 +15,7 @@ export default class PregledStatistike extends React.Component {
   }
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.11:8081/api/vratiSveRacune', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiSveRacune', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image,  Button,KeyboardAvoidingView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-
+import ipConfig from '../config.json';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Login extends React.Component {
     //console.log('http://192.168.1.11:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     //192.168.1.5
     //192.168.0.18
-     return fetch('http://192.168.1.11:8081/api/vratiKorisnika',  {
+     return fetch('http://'+ ipConfig.ip_adress.value + ':8081/api/vratiKorisnika',  {
       method: 'POST',
       headers: {
         Accept: 'application/json',

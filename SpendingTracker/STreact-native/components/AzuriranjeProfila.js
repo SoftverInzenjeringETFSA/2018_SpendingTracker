@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image,Picker } from 'react-native';
 import Toast from 'react-native-simple-toast';
+import ipConfig from '../config.json';
 
 export class AzuriranjeProfila extends Component{
   constructor(props){
@@ -9,7 +10,7 @@ export class AzuriranjeProfila extends Component{
 }
 
 componentDidMount(){
-  fetch('http://192.168.1.11:8081/api/vratiKorisnika', {
+  fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKorisnika', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -29,7 +30,7 @@ saveChanges=()=>{
   if(this.state.password !== this.state.passwordPonovi) {
     Toast.show("Unesite ponovo lozinku");
   } else {
-  fetch('http://192.168.1.11:8081/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
+  fetch('http://' + ipConfig.ip_adress.value + ':8081/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
     method: 'POST',
     headers: {
     Accept: 'application/json',

@@ -5,6 +5,8 @@ import {StyleSheet, Text, View, Button, TextInput, Image, FlatList,TouchableOpac
 //import { FlatList } from './C:/Users/Hamza/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/react-native';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
+
+import ipConfig from '../config.json';
 //npm install --save react-native-modal-datetime-picker or yarn add react-native-modal-datetime-picker
 export default class HistorijaTroskova extends React.Component {
 
@@ -22,7 +24,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://192.168.1.11:8081/api/vratiHistoriju',{
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiHistoriju',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

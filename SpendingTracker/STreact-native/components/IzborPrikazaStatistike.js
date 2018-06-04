@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
-
+import ipConfig from '../config.json';
 export default class IzborPrikazaStatistike extends React.Component {
   
     render() {

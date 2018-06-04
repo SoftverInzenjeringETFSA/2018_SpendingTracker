@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image, ScrollView} from 'react-native';
-
+import ipConfig from '../config.json';
 export class Home extends Component{
     constructor(props){
         super(props);
@@ -10,7 +10,7 @@ export class Home extends Component{
     componentDidMount(){
         //192.168.1.5
 
-        fetch('http://192.168.1.11:8081/api/trenutnoStanje',{
+        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/trenutnoStanje',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
