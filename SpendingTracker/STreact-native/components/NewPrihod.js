@@ -27,7 +27,7 @@ export class  NewExpense extends Component{
 
     })
     .then(response => response.json())
-    .then(data => this.setState({limit: data.troskovniLimit, kategorije: data.kategorije}));
+    .then(/*data =>  this.setState({limit: data.troskovniLimit, kategorije: data.kategorije})*/);
 
     fetch('http://' + ipConfig.ip_adress.value + ':8081/api/trenutnoStanje',{
       method: 'POST',
@@ -52,10 +52,10 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: BEGIN
 
     //Toast.show(this.state.limit.toString(),Toast.LONG);
-    if (this.state.value+this.state.currentValue>this.state.limit){
-      this.props.navigation.navigate('ObavjestOLimitu');
-    }
-    else{
+  //  if (this.state.value+this.state.currentValue>this.state.limit){
+    //  this.props.navigation.navigate('ObavjestOLimitu');
+  //  }
+  //  else{
 
     // DIO ZA OBAVJEST O LIMITU: END
 
@@ -89,7 +89,7 @@ export class  NewExpense extends Component{
 
     });
     Toast.show("Uspješno ste dodali novi prihod");
-  }
+  //}
   }
     render(){
         return (
