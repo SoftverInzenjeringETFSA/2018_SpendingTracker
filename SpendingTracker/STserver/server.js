@@ -85,13 +85,7 @@ var korisnikSchema = new Schema(
                 naziv: {
                   type: String,
                   required: true,
-                  /*validate: {
-                    validator: function(value){ //provjera da li postoji kategorija definisana ranije od tog korisnika
-                      if(this.parent().kategorije.findIndex(kat => {return kat.naziv == value})==-1)
-                        return false;
-                      return true;
-                    }
-                  }*/
+
                 },
               }
             }
@@ -349,7 +343,7 @@ routerAPI.post('/trenutnoStanje', function(req,res){
   var email = req.body.email;
   var lozinka = req.body.lozinka;
   var racun = req.body.racun;
-
+console.log(racun);
     korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
       if (err) return handleError(err);
       var tajRacun = person.racuni.find(rac => {return rac.naziv == racun});
@@ -414,6 +408,9 @@ routerAPI.post('/AzurirajProfil/:email/:lozinka', function(req,res){
   });
   });
 
+
+
+
 app.get('/', function (req, res) {
 
     //ovako pravite query
@@ -423,6 +420,59 @@ app.get('/', function (req, res) {
         res.send(person);
       });
 
+
+})
+
+
+// zamijenjeni tim 
+routerAPI.post('/noviRacun', function(req, res) {
+    var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka},
+        racun = req.body.noviRacun,
+        opts = { runValidators: true, context: 'query', new: true };
+        
+    korisnik.findOneAndUpdate({
+      'email' : _korisnik.email,
+      'lozinka' : _korisnik.lozinka},
+      {$push : {
+          'racuni' : {
+              'naziv' : racun.naziv,
+              'trenutniIznos' : racun.trenutniIznos
+          }
+      }}, opts,
+      function(err, data) {
+          if (!err) 
+              res.end(JSON.stringify({
+                'success' : 'true',
+                'data' : data
+              }));
+          else 
+              res.end(JSON.stringify({
+                'success' : null,
+                'data': data
+              }));
+      }
+    )
+});
+
+routerAPI.post('/sviRacuni', function(req, res) {
+  console.log('hi');
+    var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka};
+    korisnik.findOne({
+        'email' : _korisnik.email,
+        'lozinka' : _korisnik.lozinka
+    }, function(err, korisnik) {
+        if (!err) {
+            res.end(JSON.stringify({
+                'success' : 'true',
+                'data' : korisnik.racuni
+            }));
+        }
+        else
+            res.end(JSON.stringify({
+              'success' : null,
+              'data' : err
+            }));
+    });
 
 })
 

@@ -32,11 +32,11 @@ export default class Login extends React.Component {
     .then((responseJson) => {
       console.log(responseJson);
       this.person=responseJson;
-      
-      this.props.navigation.navigate('Home', this.person);
+      //this.props.navigation.navigate('Home', this.person);
+      this.props.navigation.navigate('PregledSvihRacuna', this.person);
     })
     .catch((error) => {
-      Toast.show("Neispravni podaci");
+      Toast.show("Neispravni podaci " + error);
     });
     }
 

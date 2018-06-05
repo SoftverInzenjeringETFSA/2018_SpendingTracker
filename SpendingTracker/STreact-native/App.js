@@ -16,6 +16,8 @@ import HistorijaTroskova from './components/HistorijaTroskova';
 import ObavjestOLimitu from './components/ObavjestOLimitu';
 import AzuriranjeProfila from './components/AzuriranjeProfila';
 import NewPrihod from './components/NewPrihod';
+import NoviRacun from './components/NoviRacun';
+import PregledSvihRacuna from './components/PregledSvihRacuna';
 import {Navigation, StackNavigator} from 'react-navigation'
 
 const AppNavigator = StackNavigator({
@@ -34,7 +36,11 @@ const AppNavigator = StackNavigator({
     unoskategorijzacija: {screen: unoskategorijzacija},
     ObavjestOLimitu: {screen: ObavjestOLimitu},
     HistorijaTroskova: {screen: HistorijaTroskova},
-    AzuriranjeProfila:{screen: AzuriranjeProfila}
+    AzuriranjeProfila:{screen: AzuriranjeProfila},
+
+    // nakon zamjene
+    NoviRacun : {screen : NoviRacun},
+    PregledSvihRacuna : {screen : PregledSvihRacuna}
   });
 export default class App extends React.Component {
   render() {

@@ -38,7 +38,7 @@ export class  NewExpense extends Component{
            body: JSON.stringify({
             email: this.props.navigation.state.params.email,
             lozinka: this.props.navigation.state.params.lozinka,
-            racun: "racun1"
+            racun: this.props.navigation.state.params.odabraniRacun
       }),
 
     })
@@ -60,7 +60,7 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
 
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/racun1', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/' + this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -74,7 +74,7 @@ export class  NewExpense extends Component{
 
     });
 
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/novoStanje2/racun1', {
+    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/novoStanje2/' + this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

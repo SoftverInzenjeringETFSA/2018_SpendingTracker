@@ -19,7 +19,7 @@ export class Home extends Component{
                  body: JSON.stringify({
                  email: this.props.navigation.state.params.email,
                  lozinka: this.props.navigation.state.params.lozinka,
-                 racun: "racun1"
+                 racun:  this.props.navigation.state.params.odabraniRacun
             }),
           })
         .then(response => response.json())
@@ -50,16 +50,16 @@ export class Home extends Component{
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('NewExpense',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi trošak"/>
+                this.props.navigation.navigate('NewExpense',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka, odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Unesi trošak"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('NewPrihod',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Unesi prihod"/>   
+                this.props.navigation.navigate('NewPrihod',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Unesi prihod"/>   
                     </View>
                 <View style={styles.buttonContainer}>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('PregledKategorija',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Pregled kategorija"/>
+                this.props.navigation.navigate('PregledKategorija',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Pregled kategorija"/>
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
@@ -68,16 +68,15 @@ export class Home extends Component{
 
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('AzuriranjeProfila',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Azuriraj profil"/>
+                this.props.navigation.navigate('AzuriranjeProfila',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Azuriraj profil"/>
                 </View>
 
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('HistorijaTroskova',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka})} title="Historija troskova"/>
+                this.props.navigation.navigate('HistorijaTroskova',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Historija troskova"/>
                 </View>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>
-
                 </View>
             </ScrollView >
         );
