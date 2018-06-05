@@ -343,7 +343,6 @@ routerAPI.post('/trenutnoStanje', function(req,res){
   var email = req.body.email;
   var lozinka = req.body.lozinka;
   var racun = req.body.racun;
-console.log(racun);
     korisnik.findOne({'email':email, 'lozinka': lozinka}, function (err, person) {
       if (err) return handleError(err);
       var tajRacun = person.racuni.find(rac => {return rac.naziv == racun});
@@ -455,7 +454,7 @@ routerAPI.post('/noviRacun', function(req, res) {
 });
 
 routerAPI.post('/sviRacuni', function(req, res) {
-  console.log('hi');
+  //console.log('hi');
     var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka};
     korisnik.findOne({
         'email' : _korisnik.email,
@@ -475,6 +474,73 @@ routerAPI.post('/sviRacuni', function(req, res) {
     });
 
 })
+
+routerAPI.post('/brisiRacun', function(req, res) {
+  console.log(req.body.racun)
+  var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka},
+      racun = req.body.racun,
+      opts = { runValidators: true, context: 'query', new: true };
+
+      korisnik.findOne({
+        'email' : _korisnik.email,
+        'lozinka' : _korisnik.lozinka
+      }, function(err, __korisnik) {
+        if (!err) {
+            var racuni = [];
+            for(var i = 0; i < __korisnik.racuni.length; i++)
+              racuni[i] = __korisnik.racuni[i].naziv;
+            var indeks = racuni.indexOf(racun);
+            console.log(indeks);
+            __korisnik.racuni.splice(indeks, 1);
+            korisnik.findOneAndUpdate({
+              'email' : _korisnik.email,
+              'lozinka' : _korisnik.lozinka},
+              {$set : {
+                  'racuni' : __korisnik.racuni
+              }}, opts,
+              function(err, data) {
+                  if (!err) 
+                      res.end(JSON.stringify({
+                        'success' : 'true',
+                        'data' : data
+                      }));
+                  else 
+                      res.end(JSON.stringify({
+                        'success' : null,
+                        'data': data
+                      }));
+              }
+            )
+        }
+        else 
+          res.end(JSON.stringify({
+            'success' : null,
+            'data' : err
+          }));
+      })
+    })
+
+  routerAPI.post('/obrisiKorRacun', function(req, res) {
+    console.log('brisanje');
+    var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka};
+     korisnik.deleteOne({
+       'email' : _korisnik.email,
+       'lozinka': _korisnik.lozinka
+     }, function(err) {
+       if (!err) 
+        res.end(JSON.stringify({
+          'success' : true,
+          'data' : null
+        }));
+        else
+          res.end(JSON.stringify({
+            'success' : null,
+            'data' : err
+          }));
+     })
+  });
+      
+ 
 
 app.use('/api', routerAPI);
 

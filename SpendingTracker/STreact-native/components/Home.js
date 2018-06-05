@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image, ScrollView} from 'react-native';
 import ipConfig from '../config.json';
+import Toast from 'react-native-simple-toast';
+
+
 export class Home extends Component{
     constructor(props){
         super(props);
@@ -32,6 +35,30 @@ export class Home extends Component{
       }
     onPressButton= () =>{
         this.props.navigation.navigate('Login');
+    }
+
+    brisiRacun() {
+        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/brisiRacun',{
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+                        'Content-Type': 'application/json',
+            },
+                 body: JSON.stringify({
+                    email: this.props.navigation.state.params.email,
+                    lozinka: this.props.navigation.state.params.lozinka,
+                    racun:  this.props.navigation.state.params.odabraniRacun
+            }),
+          })
+        .then(response => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            if (responseJson.success) {
+                Toast.show('Račun uspješno obrisan.')
+            }
+            else 
+                Toast.show('Greška: ' + responseJson.data);
+          });
     }
     render(){
         return (
@@ -74,6 +101,9 @@ export class Home extends Component{
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('HistorijaTroskova',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Historija troskova"/>
+                </View>
+                <View style={styles.buttonContainer}>
+                <Button color="#343C47" style={styles.button} onPress={() => this.brisiRacun()} title="Briši račun"/>
                 </View>
                 <Button color="#343C47" style={styles.button} onPress={()=>
                 this.props.navigation.navigate('DevelopersHelp')} title="Pomoć za razvojni tim"/>

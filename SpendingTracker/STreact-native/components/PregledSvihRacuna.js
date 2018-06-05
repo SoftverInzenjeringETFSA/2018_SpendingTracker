@@ -40,10 +40,38 @@ class PregledSvihRacuna extends Component {
         });
     }
 
+    obrisiRacun() {
+        console.log('bris');
+        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/obrisiKorRacun',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                 email: this.props.navigation.state.params.email,
+                 lozinka: this.props.navigation.state.params.lozinka
+            }),
+        })
+        .then(response => response.json())
+        .then((responseJSON) => {
+            if (responseJSON.success) {
+                Toast.show('Račun uspješno izbrisan.');
+                this.props.navigation.navigate('Login');
+            }
+            else 
+                Toast.show('Greška: ' + responseJSON.data);
+        });
+    }
+
    
     buttonClick(opcija) {
        if (opcija === 'Novi račun') {
             this.props.navigation.navigate('NoviRacun', {email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka});
+       }
+
+       else if (opcija === 'Obriši račun') {
+           this.obrisiRacun();
        }
        else {
             var person = {email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka, odabraniRacun : opcija}; //opcija je naziv racuna!
@@ -53,19 +81,20 @@ class PregledSvihRacuna extends Component {
 
     render() {
        var racuni = this.state.racuni;
-       racuni.push({'naziv' : 'Novi račun'});
+       racuni.push({'naziv' : 'Novi račun'}, {'naziv' : 'Obriši račun'});
     
         console.log(this.state.racuni);
         return(
        
             <View style={styles.container}>
+            <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Dobrodošli...</Text>
             <FlatList
               data={
                   racuni
               }
               renderItem={({item}) => 
                 <View style={styles.buttonContainer}>
-                    <Button style={styles.button} title={item.naziv} onPress={() => this.buttonClick(item.naziv)}></Button>
+                    <Button  color="#343C47"  style={styles.button} title={item.naziv} onPress={() => this.buttonClick(item.naziv)}></Button>
                 </View>} 
             />
 
@@ -92,7 +121,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#343C47',
         color:'white',
         width:320,
-        alignSelf: 'stretch',
         marginBottom:5
     }
   })

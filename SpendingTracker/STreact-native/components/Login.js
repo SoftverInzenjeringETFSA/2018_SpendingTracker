@@ -36,7 +36,7 @@ export default class Login extends React.Component {
       this.props.navigation.navigate('PregledSvihRacuna', this.person);
     })
     .catch((error) => {
-      Toast.show("Neispravni podaci " + error);
+      Toast.show("Neispravni podaci");
     });
     }
 
