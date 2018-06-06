@@ -74,7 +74,7 @@ export class  NewExpense extends Component{
       }),
 
     });
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/' +  this.props.navigation.state.params.odabraniRacun, {
+  /*  fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/' +  this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -86,7 +86,7 @@ export class  NewExpense extends Component{
            iznos: this.state.value
       }),
 
-    });
+    });*/
     fetch('http://' + ipConfig.ip_adress.value + ':8081/api/novoStanje/' +  this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {

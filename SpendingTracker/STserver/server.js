@@ -423,12 +423,12 @@ app.get('/', function (req, res) {
 })
 
 
-// zamijenjeni tim 
+// zamijenjeni tim
 routerAPI.post('/noviRacun', function(req, res) {
     var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka},
         racun = req.body.noviRacun,
         opts = { runValidators: true, context: 'query', new: true };
-        
+
     korisnik.findOneAndUpdate({
       'email' : _korisnik.email,
       'lozinka' : _korisnik.lozinka},
@@ -439,12 +439,12 @@ routerAPI.post('/noviRacun', function(req, res) {
           }
       }}, opts,
       function(err, data) {
-          if (!err) 
+          if (!err)
               res.end(JSON.stringify({
                 'success' : 'true',
                 'data' : data
               }));
-          else 
+          else
               res.end(JSON.stringify({
                 'success' : null,
                 'data': data
@@ -499,12 +499,12 @@ routerAPI.post('/brisiRacun', function(req, res) {
                   'racuni' : __korisnik.racuni
               }}, opts,
               function(err, data) {
-                  if (!err) 
+                  if (!err)
                       res.end(JSON.stringify({
                         'success' : 'true',
                         'data' : data
                       }));
-                  else 
+                  else
                       res.end(JSON.stringify({
                         'success' : null,
                         'data': data
@@ -512,7 +512,7 @@ routerAPI.post('/brisiRacun', function(req, res) {
               }
             )
         }
-        else 
+        else
           res.end(JSON.stringify({
             'success' : null,
             'data' : err
@@ -527,7 +527,7 @@ routerAPI.post('/brisiRacun', function(req, res) {
        'email' : _korisnik.email,
        'lozinka': _korisnik.lozinka
      }, function(err) {
-       if (!err) 
+       if (!err)
         res.end(JSON.stringify({
           'success' : true,
           'data' : null
@@ -539,8 +539,8 @@ routerAPI.post('/brisiRacun', function(req, res) {
           }));
      })
   });
-      
- 
+
+
 
 app.use('/api', routerAPI);
 

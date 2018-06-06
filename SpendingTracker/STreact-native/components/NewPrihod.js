@@ -7,7 +7,7 @@ export class  NewExpense extends Component{
   constructor(props){
 
     super(props);
-    this.state = { value: '', category:'',currentValue:'', limit:'', kategorije: []};
+    this.state = { value: '', category:'',currentValue:''};
 
   }
 
