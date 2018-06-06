@@ -49,10 +49,14 @@ export class  NewExpense extends Component{
   inputExpense=()=>{
     //192.168.1.5
 
+
     // DIO ZA OBAVJEST O LIMITU: BEGIN
 
     //Toast.show(this.state.limit.toString(),Toast.LONG);
-    if (this.state.value+this.state.currentValue>this.state.limit){
+    if (Number(this.state.value)+Number(this.state.currentValue)>Number(this.state.limit)){
+      console.log(this.state.value);
+      console.log(this.state.currentValue);
+      console.log(this.state.limit);
       this.props.navigation.navigate('ObavjestOLimitu');
     }
     else{
