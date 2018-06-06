@@ -15,7 +15,7 @@ export default class PregledStatistike extends React.Component {
   }
   componentDidMount(){
     //192.168.1.5
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiSveRacune', {
+    fetch(ipConfig.ip_adress.value + '/api/vratiSveRacune', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -56,13 +56,13 @@ export default class PregledStatistike extends React.Component {
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button}  onPress={()=>
-                this.props.navigation.navigate('IzborMjeseca')} title="Mjesecni"/>   
-                </View> 
+                this.props.navigation.navigate('IzborMjeseca')} title="Mjesecni"/>
+                </View>
         </View>
       );
     }
   }
-  
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -84,4 +84,3 @@ export default class PregledStatistike extends React.Component {
     alignItems: 'center'
   },
   });
-  

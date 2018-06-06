@@ -13,7 +13,7 @@ export class Home extends Component{
     componentDidMount(){
         //192.168.1.5
 
-        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/trenutnoStanje',{
+        fetch(ipConfig.ip_adress.value + '/api/trenutnoStanje',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -38,7 +38,7 @@ export class Home extends Component{
     }
 
     brisiRacun() {
-        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/brisiRacun',{
+        fetch(ipConfig.ip_adress.value + '/api/brisiRacun',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -56,7 +56,7 @@ export class Home extends Component{
             if (responseJson.success) {
                 Toast.show('Račun uspješno obrisan.')
             }
-            else 
+            else
                 Toast.show('Greška: ' + responseJson.data);
           });
     }
@@ -81,7 +81,7 @@ export class Home extends Component{
                 </View>
                 <View style={styles.buttonContainer}>
                 <Button color="#343C47" style={styles.button} onPress={()=>
-                this.props.navigation.navigate('NewPrihod',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Unesi prihod"/>   
+                this.props.navigation.navigate('NewPrihod',{email: this.props.navigation.state.params.email, lozinka: this.props.navigation.state.params.lozinka,  odabraniRacun : this.props.navigation.state.params.odabraniRacun})} title="Unesi prihod"/>
                     </View>
                 <View style={styles.buttonContainer}>
                 <View style={styles.buttonContainer}>

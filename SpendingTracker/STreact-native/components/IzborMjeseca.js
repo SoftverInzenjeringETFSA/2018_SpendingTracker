@@ -28,7 +28,7 @@ export default class IzborPrikazaStatistike extends React.Component {
             }
     }
     componentDidMount() {
-        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
+        fetch(ipConfig.ip_adress.value + '/api/vratiSveRacuneMjesec/' + this.state.mjesec, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -83,7 +83,7 @@ export default class IzborPrikazaStatistike extends React.Component {
       );
     }
   }
-  
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,

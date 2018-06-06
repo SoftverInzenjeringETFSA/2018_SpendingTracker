@@ -24,7 +24,7 @@ export default class HistorijaTroskova extends React.Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiHistoriju',{
+    fetch(ipConfig.ip_adress.value + '/api/vratiHistoriju',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -35,7 +35,7 @@ export default class HistorijaTroskova extends React.Component {
            lozinka: this.props.navigation.state.params.lozinka,
            kategorije: this.props.navigation.state.params.kategorije,
            datum1: this.state.datum1,
-           datum2:this.state.datum2 
+           datum2:this.state.datum2
       }),
     })
     .then(response => response.json())
@@ -62,17 +62,17 @@ export default class HistorijaTroskova extends React.Component {
   };
 
     render() {
-      
+
       return (
 
         <View>
           <View style={styles.imagecontainer}>
             </View>
-            
+
             <Button color="#343C47" style={styles.button} title="OD" onPress={this._showDateTimePicker}/>
             <Button color="#343C47" style={styles.button} title="DO" onPress={this._showDateTimePicker}/>
             <Button color="#343C47" style={styles.button} title="POTVRDI" onPress={this.pokreni_upit}/>
-            
+
             <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this._handleDatePicked}
@@ -106,7 +106,7 @@ export default class HistorijaTroskova extends React.Component {
       borderRadius: 5
     }
   });
-  
+
   const styles = StyleSheet.create({
     imagecontainer: {
       alignItems: 'center'
@@ -120,7 +120,7 @@ export default class HistorijaTroskova extends React.Component {
   },
   row:{
     color: '#343C47',
-    marginLeft: 10, 
+    marginLeft: 10,
     fontSize:15,
     borderRadius: 4,
     borderWidth: 1,
@@ -152,4 +152,3 @@ export default class HistorijaTroskova extends React.Component {
       width:200
     }
   });
-

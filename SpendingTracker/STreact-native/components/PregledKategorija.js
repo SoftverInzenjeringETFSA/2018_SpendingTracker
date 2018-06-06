@@ -14,7 +14,7 @@ export default class PregledKategorije extends Component {
 
   componentDidMount(){
     //192.168.1.5
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKategorije', {
+    fetch(ipConfig.ip_adress.value + '/api/vratiKategorije', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,7 +31,7 @@ export default class PregledKategorije extends Component {
           console.log(response.status + ' ' +data.error);
           Toast.show(response.status + ' ' + data.error);
         });
-      
+
       }
       return response.json();
     })
@@ -39,7 +39,7 @@ export default class PregledKategorije extends Component {
   }
 
   update(){
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKategorije', {
+    fetch(ipConfig.ip_adress.value + '/api/vratiKategorije', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -56,16 +56,16 @@ export default class PregledKategorije extends Component {
           console.log(response.status + ' ' +data.error);
           Toast.show(response.status + ' ' + data.error);
         });
-      
+
       }
       return response.json();
     })
-    .then(data => this.setState({kategorije: data}))  
+    .then(data => this.setState({kategorije: data}))
   }
 
   novaKategorija=() => {
     //192.168.1.5
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNovuKategoriju', {
+    fetch(ipConfig.ip_adress.value + '/api/dodajNovuKategoriju', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -83,18 +83,18 @@ export default class PregledKategorije extends Component {
           console.log(response.status + ' ' +data.error);
           Toast.show(response.status + ' ' + data.error);
         });
-      
+
       }
       else {
         Toast.show('Kategorija je dodana');
-      } 
+      }
       return response.json();
     })
     .then(data => this.setState({kategorije: data}))
   }
 
   ukloniKategoriju=(kat) => {
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/ukloniKategoriju/'+ kat, {
+    fetch(ipConfig.ip_adress.value + '/api/ukloniKategoriju/'+ kat, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -112,14 +112,14 @@ export default class PregledKategorije extends Component {
           Toast.show(response.status + ' ' + data.error);
         });
       }
-      else { 
-        Toast.show(kat + ' je uklonjena');  
-      }  
+      else {
+        Toast.show(kat + ' je uklonjena');
+      }
       return response.json();
     })
     .then(data => this.setState({kategorije: data}))
   }
-  
+
   render() {
     return (
         <ScrollView >
@@ -130,16 +130,16 @@ export default class PregledKategorije extends Component {
                     />
             <Text style={{color: '#343C47', fontWeight: 'bold', fontSize:25}}>Pregled kategorija</Text>
         </View>
-        
+
         <View style={styles.contentcontainer}>
-              
+
               <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                 <Text style={{color: '#343C47',marginLeft: 10, fontSize:15}}>Nova kategorija: </Text>
                 <TextInput style={styles.input}
                   onChangeText={(value) => this.setState({unos: value})}>
                 </TextInput>
                 <Button color="#343C47" style={styles.button} title="Unesi" onPress={this.novaKategorija}/>
-              </View>     
+              </View>
         </View>
         <View >
           <FlatList
@@ -165,7 +165,7 @@ export default class PregledKategorije extends Component {
           borderRadius: 5
         }
       });
-      
+
       const styles = StyleSheet.create({
         imagecontainer: {
           alignItems: 'center'
@@ -178,7 +178,7 @@ export default class PregledKategorije extends Component {
           marginBottom:8
       },
       row:{
-        marginLeft: 10, 
+        marginLeft: 10,
         borderRadius: 4,
         borderWidth: 1,
         borderColor: '#6FAD4A',
@@ -194,7 +194,7 @@ export default class PregledKategorije extends Component {
         marginBottom:5
     },
         container: {
-          
+
           width:200,
           backgroundColor: '#F0FFFF',
           alignItems: 'center',
@@ -208,5 +208,3 @@ export default class PregledKategorije extends Component {
           width:200
         }
       });
-
- 

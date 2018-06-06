@@ -14,7 +14,7 @@ export class  NewExpense extends Component{
   // DIO ZA OBAVJEST O LIMITU: BEGIN
   //this.props.navigation.state.params.email
   componentDidMount(){
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKorisnika', {
+    fetch(ipConfig.ip_adress.value + '/api/vratiKorisnika', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -29,7 +29,7 @@ export class  NewExpense extends Component{
     .then(response => response.json())
     .then(/*data =>  this.setState({limit: data.troskovniLimit, kategorije: data.kategorije})*/);
 
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/trenutnoStanje',{
+    fetch(ipConfig.ip_adress.value + '/api/trenutnoStanje',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -60,7 +60,7 @@ export class  NewExpense extends Component{
     // DIO ZA OBAVJEST O LIMITU: END
 
 
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/dodajNoviPrihod/' + this.props.navigation.state.params.odabraniRacun, {
+    fetch(ipConfig.ip_adress.value + '/api/dodajNoviPrihod/' + this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -74,7 +74,7 @@ export class  NewExpense extends Component{
 
     });
 
-    fetch('http://' + ipConfig.ip_adress.value + ':8081/api/novoStanje2/' + this.props.navigation.state.params.odabraniRacun, {
+    fetch(ipConfig.ip_adress.value + '/api/novoStanje2/' + this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

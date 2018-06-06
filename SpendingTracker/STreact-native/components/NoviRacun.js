@@ -16,7 +16,7 @@ class NoviRacun extends Component {
     }
 
     dodajRacun() {
-        fetch('http://' + ipConfig.ip_adress.value + ':8081/api/noviRacun',{
+        fetch(ipConfig.ip_adress.value + '/api/noviRacun',{
             method: 'POST',
             headers: {
                 Accept: 'application/json',

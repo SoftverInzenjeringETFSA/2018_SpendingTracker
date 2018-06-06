@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
 var bodyParser = require('body-parser');
-
+var port = process.env.PORT || 8081;
 var routerAPI = express.Router();
 
 mongoose.connect('mongodb+srv://kamilica:C5iWryKT7srs1rIc@stcluster-4mwen.mongodb.net/SpendingTracker?retryWrites=true')
@@ -544,7 +544,7 @@ routerAPI.post('/brisiRacun', function(req, res) {
 
 app.use('/api', routerAPI);
 
-var server = app.listen(8081, function () {
+var server = app.listen(port, function () {
    var host = server.address().address
    var port = server.address().port
 

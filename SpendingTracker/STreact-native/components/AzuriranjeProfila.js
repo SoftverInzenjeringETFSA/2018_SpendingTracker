@@ -10,7 +10,7 @@ export class AzuriranjeProfila extends Component{
 }
 
 componentDidMount(){
-  fetch('http://' + ipConfig.ip_adress.value + ':8081/api/vratiKorisnika', {
+  fetch(ipConfig.ip_adress.value + '/api/vratiKorisnika', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -20,7 +20,7 @@ componentDidMount(){
           email: this.props.navigation.state.params.email,
           lozinka: this.props.navigation.state.params.lozinka
     }),
-    
+
   })
   .then(response => response.json())
   .then(data => this.setState({password: data.lozinka, passwordPonovi: data.lozinka, mjesecniPrihodi:data.mjesecniPrihod.toString(), limit: data.troskovniLimit.toString(), valuta: data.valuta, email: data.email}));
@@ -30,7 +30,7 @@ saveChanges=()=>{
   if(this.state.password !== this.state.passwordPonovi) {
     Toast.show("Unesite ponovo lozinku");
   } else {
-  fetch('http://' + ipConfig.ip_adress.value + ':8081/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
+  fetch(ipConfig.ip_adress.value + '/api/AzurirajProfil/neko@nekoo.com/lozinka123', {
     method: 'POST',
     headers: {
     Accept: 'application/json',
@@ -66,7 +66,7 @@ saveChanges=()=>{
   marginBottom:10,
   backgroundColor: 'transparent',
   width:200,
-  marginLeft: 20 
+  marginLeft: 20
   }}
   onChangeText={(value) => this.setState({password: value})} secureTextEntry={true}>
   </TextInput></View>
@@ -77,7 +77,7 @@ saveChanges=()=>{
     height:35,
     marginBottom:10,
     backgroundColor: 'transparent',
-    width:200, 
+    width:200,
     marginLeft: 30
     }}
   onChangeText={(value) => this.setState({passwordPonovi: value})} secureTextEntry={true}>
@@ -90,7 +90,7 @@ saveChanges=()=>{
     marginBottom:10,
     backgroundColor: 'transparent',
     width:200,
-    marginLeft: 38 
+    marginLeft: 38
     }}
     onChangeText={(value) => this.setState({mjesecniPrihodi:value})} ></TextInput>
   </View>
@@ -102,7 +102,7 @@ saveChanges=()=>{
       marginBottom:10,
       backgroundColor: 'transparent',
       width:200,
-      marginLeft: 50 
+      marginLeft: 50
       }}
     onChangeText={(value) => this.setState({limit: value})}></TextInput></View>
   <View style={{flexDirection:'row', flexWrap:'wrap'}}>
@@ -113,7 +113,7 @@ saveChanges=()=>{
   marginBottom:10,
   backgroundColor: 'transparent',
   width:200,
-  marginLeft: 41 
+  marginLeft: 41
   }}
   onChangeText={(value) => this.setState({valuta: value})} ></TextInput>
   </View>
@@ -125,7 +125,7 @@ saveChanges=()=>{
     marginBottom:10,
     backgroundColor: 'transparent',
     width:200,
-    marginLeft: 46 
+    marginLeft: 46
     }}
     onChangeText={(value) => this.setState({email:value})} ></TextInput>
   </View>
@@ -138,7 +138,7 @@ saveChanges=()=>{
     </View>
     </View>
     <View style={styles.buttonContainer}>
-    <Button color="#343C47" style={styles.button} title="Spremi" onPress={this.saveChanges}/> 
+    <Button color="#343C47" style={styles.button} title="Spremi" onPress={this.saveChanges}/>
     </View>
   </View>
     );

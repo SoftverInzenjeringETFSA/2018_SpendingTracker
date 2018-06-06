@@ -8,7 +8,7 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {email: '', password:''};
-    
+
     this.person;
   }
 
@@ -16,7 +16,7 @@ export default class Login extends React.Component {
     //console.log('http://192.168.1.11:8081/api/vratiKorisnika/'+ this.state.email +'/' + this.state.password)
     //192.168.1.5
     //192.168.0.18
-     return fetch('http://'+ ipConfig.ip_adress.value + ':8081/api/vratiKorisnika',  {
+     return fetch(ipConfig.ip_adress.value+ '/api/vratiKorisnika',  {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -25,7 +25,7 @@ export default class Login extends React.Component {
            body: JSON.stringify({
            email: this.state.email,
            lozinka: this.state.password
-		  
+
       }),
     })
     .then((response) => response.json())
@@ -43,20 +43,20 @@ export default class Login extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container}>
-        <Image 
+        <Image
           style={styles.imageContainer}
           source={require('../img/logo.png')}
         />
         <Text style={styles.header}>Dobrodošli</Text>
         <Text style={styles.header2}>HAFE Spending Tracker aplikacija</Text>
-        
-        
+
+
         <TextInput
           style={styles.input}
           placeholder="Napišite email ovdje"
           onChangeText={(text) => this.setState({email:text})}
         />
-        
+
         <TextInput
           style={styles.input}
           placeholder="Napišite lozinku ovdje"
@@ -69,9 +69,9 @@ export default class Login extends React.Component {
                  this.onPressButton} title="Prijavi se"/>
         </View>
 
-          <Text 
+          <Text
          style={styles.register}>Nemate račun? Registruj se</Text>
-       
+
       </KeyboardAvoidingView>
     );
   }
@@ -127,4 +127,3 @@ const styles = StyleSheet.create({
 
   }
 });
-
