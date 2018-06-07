@@ -1,9 +1,34 @@
 # 2018_SpendingTracker
 
-+ Pokretanje aplikacije
++ Pokretanje klijentske aplikacije lokalno
 
-Za pokretanje servera potrebno je unutar STserver foldera pokrenuti komandu npm start. Za pokretanje klijenta potrebno je unutar STreact-native foldera pokrenuti komandu npm install, a nakon toga komandu npm start android.
+1. unutar STreact-native foldera pokrenuti komandu npm install
+2. unutar STreact-native foldera pokrenuti komantu npm start android
 
-+ Komunikacija sa serverom
+Ukoliko se koristi mobilni uređaj:
 
-Za ispravno funkcionisanje aplikacije potrebno je omogućiti komunikaciju sa računarom na kojem je pokrenut server. Za tu svrhu, neophodno je urediti datoteku config.json, koja se nalazi u folderu STreact-native (klijent), te u polje "value" upisati IP adresu računara.
+3. na mobilnom uređaju instalirati expo aplikaciju
+4. preko expo aplikacije skenirati QR kod dobijen naredbom npm start android
+
+Ukoliko se koristi emulator:
+
+3. u komandnoj liniji unijeti "a"
+
+ Napomena:
+ Mobilni uređaj mora biti na istoj mreži kao i IP na kojem je pokrenuta aplikacija.
+
++ Pokretanje aplikacije preko online expo repozitorija
+
+1. Preko mobilnog uređaja otići na link: https://exp.host/@wetania/streact-native
+2. Odabrati opciju otvaranja aplikacije preko expo uređaja
+
++ Pokretanje servera lokalno
+
+Ukoliko klijent aplikacija ne može da napravi vezu sa serverom moguće je pokrenuti server lokalno:
+1. unutar STserver foldera pokrenuti komandu npm start (ovim će server biti pokrenut na localhostu na portu 8081)
+2. unutar config.json file-a promijeniti vrijednost na "http://<IP adresa računara na kojem je pokrenut server>:8081"
+3. ponoviti korake za pokretanje klijentske aplikacije u lokalnoj mreži
+
+ Napomena: 
+ I server i mobilni uređaj i aplikacija moraju biti u istoj mreži.
+
