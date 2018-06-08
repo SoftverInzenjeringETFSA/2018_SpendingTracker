@@ -16,15 +16,19 @@ Ukoliko se koristi emulator:
 
  **Napomena:**
  Mobilni uređaj mora biti na istoj mreži kao i IP na kojem je pokrenuta aplikacija.
+ Backend je deployan na Heroku.
 
 ## Pokretanje aplikacije preko online expo repozitorija
 
 1. Preko mobilnog uređaja otići na link: https://exp.host/@wetania/streact-native
 2. Odabrati opciju otvaranja aplikacije preko expo uređaja
 
+ **Napomena:**
+ Backend je deployan na Heroku.
+
 ## Pokretanje servera lokalno
 
-Ukoliko klijent aplikacija ne može da napravi vezu sa serverom moguće je pokrenuti server lokalno:
+Ukoliko klijent aplikacija ne može da napravi vezu sa deployanim serverom moguće je pokrenuti server lokalno:
 1. unutar STserver foldera pokrenuti komandu npm start (ovim će server biti pokrenut na localhostu na portu 8081)
 2. unutar config.json file-a promijeniti vrijednost na "http://<IP adresa računara na kojem je pokrenut server>:8081"
 3. ponoviti korake za pokretanje klijentske aplikacije u lokalnoj mreži
