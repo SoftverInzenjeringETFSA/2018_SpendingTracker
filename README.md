@@ -36,3 +36,11 @@ Ukoliko klijent aplikacija ne može da napravi vezu sa deployanim serverom mogu�
  **Napomena:**
  I server i mobilni uređaj i aplikacija moraju biti u istoj mreži.
 
+
+## Login podaci:
+
+Email: hhh@h.com Password: 12345HB
+
+Alternativni login podaci:
+
+Email: hanko@o.com Password: Hankec12
