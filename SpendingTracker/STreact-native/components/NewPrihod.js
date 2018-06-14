@@ -58,8 +58,10 @@ export class  NewExpense extends Component{
   //  else{
 
     // DIO ZA OBAVJEST O LIMITU: END
-
-
+if(isNaN(this.state.value)) {
+  Toast.show("Niste unijeli ispravan iznos");
+}
+else {
     fetch(ipConfig.ip_adress.value + '/api/dodajNoviPrihod/' + this.props.navigation.state.params.odabraniRacun, {
       method: 'POST',
       headers: {
@@ -90,6 +92,7 @@ export class  NewExpense extends Component{
     });
     Toast.show("Uspješno ste dodali novi prihod");
   //}
+}
   }
     render(){
         return (
