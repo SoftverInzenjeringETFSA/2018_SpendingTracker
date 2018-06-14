@@ -34,6 +34,7 @@ export class Home extends Component{
           })
       }
     onPressButton= () =>{
+      Toast.show("Doviđenja - uspješna odjava");
         this.props.navigation.navigate('Login');
     }
 

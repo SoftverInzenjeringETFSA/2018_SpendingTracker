@@ -32,6 +32,8 @@ export default class Login extends React.Component {
     .then((responseJson) => {
       console.log(responseJson);
       this.person=responseJson;
+
+      Toast.show("Dobrodošli - uspješna prijava");
       //this.props.navigation.navigate('Home', this.person);
       this.props.navigation.navigate('PregledSvihRacuna', this.person);
     })
