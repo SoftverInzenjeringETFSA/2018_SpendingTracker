@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Button, TextInput, Image, ScrollView, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput, Image, ScrollView, FlatList, Alert} from 'react-native';
 import ipConfig from '../config.json';
 import Toast from 'react-native-simple-toast';
 
@@ -41,27 +41,44 @@ class PregledSvihRacuna extends Component {
     }
 
     obrisiRacun() {
-        console.log('bris');
-        fetch(ipConfig.ip_adress.value + '/api/obrisiKorRacun',{
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                 email: this.props.navigation.state.params.email,
-                 lozinka: this.props.navigation.state.params.lozinka
-            }),
-        })
-        .then(response => response.json())
-        .then((responseJSON) => {
-            if (responseJSON.success) {
-                Toast.show('Račun uspješno izbrisan.');
-                this.props.navigation.navigate('Login');
-            }
-            else
-                Toast.show('Greška: ' + responseJSON.data);
-        });
+
+      Alert.alert(
+  'Brisanje računa',
+  'Želite li obrisati račun:',
+  [
+
+    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+    {text: 'OK', onPress: () => {
+      console.log('OK Pressed');
+      console.log('bris');
+      fetch(ipConfig.ip_adress.value + '/api/obrisiKorRacun',{
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+               email: this.props.navigation.state.params.email,
+               lozinka: this.props.navigation.state.params.lozinka
+          }),
+      })
+      .then(response => response.json())
+      .then((responseJSON) => {
+          if (responseJSON.success) {
+              Toast.show('Račun uspješno izbrisan.');
+              this.props.navigation.navigate('Login');
+          }
+          else
+              Toast.show('Greška: ' + responseJSON.data);
+      });
+
+    }},
+  ],
+  { cancelable: false }
+)
+
+
+
     }
 
 
