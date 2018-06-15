@@ -60,7 +60,7 @@ var korisnikSchema = new Schema(
             type: String,
             validate: {
               validator: function(value){
-                return /^([a-z][0-9]*){3,19}$/.test(value);
+                return /^([a-z|A-Z][0-9]*){3,19}$/.test(value);
               }
             }
           },
