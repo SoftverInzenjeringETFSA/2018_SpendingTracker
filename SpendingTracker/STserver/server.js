@@ -428,29 +428,57 @@ routerAPI.post('/noviRacun', function(req, res) {
     var _korisnik = {'email' : req.body.email, 'lozinka' : req.body.lozinka},
         racun = req.body.noviRacun,
         opts = { runValidators: true, context: 'query', new: true };
-
-    korisnik.findOneAndUpdate({
+    korisnik.findOne({
       'email' : _korisnik.email,
-      'lozinka' : _korisnik.lozinka},
-      {$push : {
-          'racuni' : {
-              'naziv' : racun.naziv,
-              'trenutniIznos' : racun.trenutniIznos
+      'lozinka' : _korisnik.lozinka
+    }, function(err, __korisnik) {
+      if (__korisnik) {
+        if (__korisnik.racuni.length >= 10) {
+          res.end(JSON.stringify({
+            'success' : null,
+            'data' : 'Korisnik ima već 10 kreiranih računa'
+          }));
+        }
+        else {
+          let i = 0;
+          for (i = 0; i < __korisnik.racuni.length; i++) {
+            if (__korisnik.racuni[i].naziv == racun.naziv) {
+              break;
+            }
           }
-      }}, opts,
-      function(err, data) {
-          if (!err)
-              res.end(JSON.stringify({
-                'success' : 'true',
-                'data' : data
-              }));
-          else
+            if (i == __korisnik.racuni.length) {
+              korisnik.findOneAndUpdate({
+                'email' : _korisnik.email,
+                'lozinka' : _korisnik.lozinka},
+                {$push : {
+                    'racuni' : {
+                        'naziv' : racun.naziv,
+                        'trenutniIznos' : racun.trenutniIznos
+                    }
+                }}, opts,
+                function(err, data) {
+                    if (!err)
+                        res.end(JSON.stringify({
+                          'success' : 'true',
+                          'data' : data
+                        }));
+                    else
+                        res.end(JSON.stringify({
+                          'success' : null,
+                          'data': err
+                        }));
+                }
+              )
+            }
+            else
               res.end(JSON.stringify({
                 'success' : null,
-                'data': data
+                'data' : 'Već postoji račun sa unesenim nazivom računa.'
               }));
+          
+        }
       }
-    )
+    })
 });
 
 routerAPI.post('/sviRacuni', function(req, res) {
