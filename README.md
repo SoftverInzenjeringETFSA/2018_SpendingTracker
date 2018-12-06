@@ -45,6 +45,4 @@ Alternativni login podaci:
 
 Email: hanko@o.com Password: Hankec12
 
-Ukoliko se izbrišu navedeni accounti, potrebno je javiti se administratoru sistema da kreira novi korisnički račun. Novi račun biće kreiran unutar jedne radne sedmice.
-
 Administrator: Hanna Bojadžić
